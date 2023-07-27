@@ -19,20 +19,19 @@ function App() {
         fetchTrainings();
     }, []);
 
-    if (!Array.isArray(trainings) || trainings.length === 0){
-        return "Lade...";
-    }
   return (
     <>
         <MyCalendar />
-        <h1>Verfügbare Trainings</h1>
-        <ul>
-            {trainings.map((training) => (
-                <li key={training.id}>
-                    {training.datum}
-                </li>
-            ))}
-        </ul>
+       <div style={ {flex: 1 }}>
+           <h1>Verfügbare ddTrainings</h1>
+           <ul>
+               {trainings.map((training) => (
+                   <li key={training.id}>
+                       {training.datum}
+                   </li>
+               ))}
+           </ul>
+       </div>
         </>
   )
 }
