@@ -21,7 +21,7 @@ function App() {
   return (
     <>
 
-       <div style={ {flex: 1 }}>
+       <div style={{width:"25%", flex: 1 ,float:"right"}}>
            <h1>Verfügbare Trainings</h1>
            <ul>
                {trainings.map((training) => (

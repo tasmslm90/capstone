@@ -17,7 +17,7 @@ public class TrainingServiceTest {
                 new Training("1", "02.08.20023"),
                 new Training("2", "04.08.20023")
         ));
-        List<Training> actual = trainingService.getAllTraining();
+        List<Training> actual = trainingService.getAllTrainings();
         List<Training> expected = Arrays.asList(
                 new Training("1", "02.08.20023"),
                 new Training("2", "04.08.20023")
