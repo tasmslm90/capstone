@@ -1,9 +1,9 @@
 import {useEffect, useState} from 'react'
 import './App.css'
-import MyCalendar from "./MyCalendar.tsx";
 import axios from "axios";
+import {training} from "./Training.tsx";
 function App() {
-    const [trainings, setTrainings] = useState([]);
+    const [trainings, setTrainings] = useState<training[]>([]);
 
 
     const fetchTrainings = async () => {
@@ -21,7 +21,7 @@ function App() {
 
   return (
     <>
-        <MyCalendar />
+
        <div style={ {flex: 1 }}>
            <h1>Verfügbare ddTrainings</h1>
            <ul>
