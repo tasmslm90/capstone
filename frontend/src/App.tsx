@@ -5,7 +5,6 @@ import {training} from "./Training.tsx";
 function App() {
     const [trainings, setTrainings] = useState<training[]>([]);
 
-
     const fetchTrainings = async () => {
         try {
             const response = await axios.get("/api/training");
@@ -23,7 +22,7 @@ function App() {
     <>
 
        <div style={ {flex: 1 }}>
-           <h1>Verfügbare ddTrainings</h1>
+           <h1>Verfügbare Trainings</h1>
            <ul>
                {trainings.map((training) => (
                    <li key={training.id}>
