@@ -16,5 +16,11 @@ public class TrainingController {
         return this.trainingService.getAllTrainings();
     }
 
+    @PostMapping
+    public Training addTraining(@RequestBody TrainingWithoutId trainingWithoutId ){
+        Training training = trainingService.addTraining(trainingWithoutId);
+        return training;
+    }
+
 }
 

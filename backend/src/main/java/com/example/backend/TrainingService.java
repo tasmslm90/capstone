@@ -10,7 +10,18 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TrainingService {
     private final TrainingRepository trainingRepository;
+    private final UuidService uuidService;
 
     public List<Training> getAllTrainings(){return this.trainingRepository.findAll();}
+
+
+    public Training addTraining(TrainingWithoutId trainingWithoutId){
+        String id = uuidService.generateUUID();
+        Training training = new Training();
+        training.setId(id);
+        training.setDatum(trainingWithoutId.getDatum());
+        trainingRepository.save(training);
+        return training;
+    }
 
 }
