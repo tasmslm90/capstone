@@ -14,8 +14,8 @@ public class TrainingController {
     private final TrainingService trainingService;
 
     @GetMapping
-    public List<Training> getAllTraining(){
-        return this.trainingService.getAllTraining();
+    public List<Training> getAllTrainings(){
+        return this.trainingService.getAllTrainings();
     }
 
 }

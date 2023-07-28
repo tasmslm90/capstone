@@ -11,6 +11,6 @@ import java.util.List;
 public class TrainingService {
     private final TrainingRepository trainingRepository;
 
-    public List<Training> getAllTraining(){return this.trainingRepository.findAll();}
+    public List<Training> getAllTrainings(){return this.trainingRepository.findAll();}
 
 }

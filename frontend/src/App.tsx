@@ -1,9 +1,9 @@
 import {useEffect, useState} from 'react'
 import './App.css'
 import axios from "axios";
-import {training} from "./Training.tsx";
+import {Training} from "./Training.tsx";
 function App() {
-    const [trainings, setTrainings] = useState<training[]>([]);
+    const [trainings, setTrainings] = useState<Training[]>([]);
 
     const fetchTrainings = async () => {
         try {
