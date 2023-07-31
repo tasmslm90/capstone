@@ -1,4 +1,18 @@
-
+.div1{
+    background-color: #f0f0f0 ;
+    width: 600px;
+    height: 400px;
+    float: left;
+}
+.button{
+    background-color: #007bff ;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+}
+:root {
+    width: 100%;
+}
 
 
 

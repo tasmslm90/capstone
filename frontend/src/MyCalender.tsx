@@ -22,7 +22,7 @@ function MyCalendar() {
 
     return (
         <>
-            <div>
+            <div className={"div1"}>
                 <FullCalendar
                     plugins={[dayGridPlugin, momentPlugin]}
                     initialView="dayGridMonth"
@@ -36,7 +36,7 @@ function MyCalendar() {
             </div>
             {clickedDates.length > 0 && (
                 <div>
-                    <h2>Geklickte Daten:</h2>
+                    <h2>Neu Training hinzufügen:</h2>
                     <ul>
                         {clickedDates.map((date, index) => (
                             <li key={index}>{new Date(date).toLocaleDateString()}</li>

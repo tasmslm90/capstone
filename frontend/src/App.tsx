@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react'
 import './App.css'
 import axios from "axios";
 import {Training} from "./Training.tsx";
+import MyCalendar from "./MyCalender.tsx";
 function App() {
     const [trainings, setTrainings] = useState<Training[]>([]);
 
@@ -21,8 +22,10 @@ function App() {
   return (
     <>
 
+
+        <MyCalendar></MyCalendar>
        <div style={{width:"25%", flex: 1 ,float:"right"}}>
-           <h1>Verfügbare Trainings</h1>
+           <h1>Trainingdays</h1>
            <ul>
                {trainings.map((training) => (
                    <li key={training.id}>
