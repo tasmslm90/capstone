@@ -3,6 +3,8 @@ package com.example.backend;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
@@ -18,8 +20,11 @@ public class TrainingController {
 
     @PostMapping
     public Training addTraining(@RequestBody TrainingWithoutId trainingWithoutId ){
-        Training training = trainingService.addTraining(trainingWithoutId);
-        return training;
+        TrainingWithoutId training = new TrainingWithoutId();
+        training.setDate(trainingWithoutId.getDate());
+        training.setTime(trainingWithoutId.getTime());
+        Training savedTraining = trainingService.addTraining(training);
+        return savedTraining;
     }
 
 }

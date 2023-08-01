@@ -4,6 +4,8 @@ package com.example.backend;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -20,9 +22,8 @@ public class TrainingService {
         String id = uuidService.generateUUID();
         Training training = new Training();
         training.setId(id);
-        training.setDatum(trainingWithoutId.getDatum());
-        training.setUhrzeit(trainingWithoutId.getUhrzeit());
-        training.setTrainingArten(trainingWithoutId.getTrainingArten());
+        training.setDate(trainingWithoutId.getDate());
+        training.setTime(trainingWithoutId.getTime());
         trainingRepository.save(training);
         return training;
     }

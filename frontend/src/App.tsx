@@ -10,6 +10,7 @@ function App() {
         try {
             const response = await axios.get("/api/training");
             setTrainings(response.data);
+            console.log(response.data)
         } catch (error) {
             console.error("Fehler beim Abrufen der Trainings:", error);
         }
@@ -22,14 +23,14 @@ function App() {
   return (
     <>
 
-
         <MyCalendar></MyCalendar>
-       <div style={{width:"25%", flex: 1 ,float:"right"}}>
-           <h1>Trainingdays</h1>
+
+       <div  className={"div20"}>
+           <h2>Training Days</h2>
            <ul>
                {trainings.map((training) => (
                    <li key={training.id}>
-                       {training.datum}
+                       {training.date} : {training.time}
                    </li>
                ))}
            </ul>

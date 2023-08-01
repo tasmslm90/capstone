@@ -1,114 +1,97 @@
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import momentPlugin from "@fullcalendar/moment";
-import deLocale from '@fullcalendar/core/locales/de';
-import {ChangeEvent, ChangeEventHandler, useState} from "react";
+//import deLocale from '@fullcalendar/core/locales/de'; deutsch
+import {ChangeEvent, useState} from "react";
+import axios from "axios";
 
 function MyCalendar() {
     const [clickedDates, setClickedDates] = useState<string[]>([]);
     const [selectedTime, setSelectedTime] = useState("");
-    const [selectedTrainingArten, setSelectedTrainingArten] = useState<string[]>([]);
 
-    const handleDayClick = (dateClickInfo:any) => {
+    const handleDayClick = (dateClickInfo: any) => {
         const clickedDateStr = dateClickInfo.date.toISOString();
         setClickedDates((prevDates) => [...prevDates, clickedDateStr]);
 
     };
-    const renderDayButton = (info: {dayNumberText:string,date:Date}) => {
+    const renderDayButton = (info: { dayNumberText: string, date: Date }) => {
         return (
-            <button  className={"button"} onClick={() => handleDayClick(info)}>
+            <button className={"button"} onClick={() => handleDayClick(info)}>
                 {info.dayNumberText}
             </button>
         );
     };
-    const handleTimeChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const handleTimeChange = (event: ChangeEvent<HTMLSelectElement>) => {
         setSelectedTime(event.target.value);
     };
+    const generateTimeOptions = () => {
+        const timeOptions = [];
+        for (let h = 16; h < 21; h++) {
+            for (let m = 0; m < 60; m += 15) {
+                const hour = h.toString().padStart(2, "0");
+                const minute = m.toString().padStart(2, "0");
+                timeOptions.push(`${hour}:${minute}`);
+            }
+        }
+        return timeOptions;
+    };
+    const handleAddTraining = () => {
+        const newTraining = {
+            date: clickedDates[clickedDates.length - 1],
+            time: selectedTime
+        };
 
-    const handleTrainingArtChange = (event:ChangeEvent<HTMLInputElement>) => {
-        const selectedTrainingArt = event.target.value;
-        setSelectedTrainingArten((prevTrainingArten) =>
-            event.target.checked
-                ? [...prevTrainingArten, selectedTrainingArt]
-                : prevTrainingArten.filter((art) => art !== selectedTrainingArt)
-        );
+        axios.post('/api/training', newTraining)
+            .then((response) => {
+                console.log('Training wurde erfolgreich gespeichert:', response.data);
+
+            })
+            .catch((error) => {
+                console.error('Fehler beim Speichern des Trainings:', error);
+            });
     };
 
     return (
         <>
-            <div className={"div1"}>
-                <FullCalendar
-                    plugins={[dayGridPlugin, momentPlugin]}
-                    initialView="dayGridMonth"
-                    firstDay={1}
-                    locale={deLocale}
-                    dayCellContent={renderDayButton}
-                    aspectRatio= {1}
-                    dateClick={handleDayClick}
+            <div className={"container"}>
+                <div className={"clander1"}>
+                    <h1>Trainingsplaner</h1>
+                    {<FullCalendar
+                        plugins={[dayGridPlugin, momentPlugin]}
+                        initialView="dayGridMonth"
+                        firstDay={1}
+                       // locale={deLocale}
+                        dayCellContent={renderDayButton}
+                        aspectRatio={1}
+                        dateClick={handleDayClick}
 
-                />
+                    />}
+                </div>
             </div>
             {clickedDates.length > 0 && (
-                <div>
-                    <h2>Neu Training hinzufügen:</h2>
-                    <ul>
+                <div className={"newtraining"}>
+                    <h2> Add new Training</h2>
+                    <ul >
                         {clickedDates.map((date, index) => (
-                            <li key={index}>{new Date(date).toLocaleDateString()}</li>
+                            <li className={ "list1"} key={index}>{new Date(date).toLocaleDateString()}</li>
                         ))}
                     </ul>
-
-                    <label>
-                        Uhrzeit:
-                        <input
-                            type="time"
-                            value={selectedTime}
-                            onChange={handleTimeChange}
-                        />
+                    <label className={"time-label"}>
+                        <strong> Time : </strong>
+                        <select className={"select-time"} value={selectedTime} onChange={handleTimeChange}>
+                            {generateTimeOptions().map((timeOption) => (
+                                <option className={"time"} key={timeOption} value={timeOption}>
+                                    {timeOption}
+                                </option>
+                            ))}
+                        </select>
                     </label>
-                    <div className={"art"}>
-                        Trainingsart:
-                        <label>
-                            <input
-                                type="checkbox"
-                                value="Kondition"
-                                checked={selectedTrainingArten.includes("Kondition")}
-                                onChange={handleTrainingArtChange}
-                            />
-                            Kondition
-                        </label>
-                        <label>
-                            <input
-                                type="checkbox"
-                                value="Kraft"
-                                checked={selectedTrainingArten.includes("Kraft")}
-                                onChange={handleTrainingArtChange}
-                            />
-                            Kraft
-                        </label>
-                        <label>
-                            <input
-                                type="checkbox"
-                                value="Taktik"
-                                checked={selectedTrainingArten.includes("Taktik")}
-                                onChange={handleTrainingArtChange}
-                            />
-                            Taktik
-                        </label>
-                        <label>
-                            <input
-                                type="checkbox"
-                                value="Besprechung"
-                                checked={selectedTrainingArten.includes("Besprechung")}
-                                onChange={handleTrainingArtChange}
-                            />
-                            Besprechung
-                        </label>
-                    </div>
-
-
+                    <div className={"space-div"}></div>
+                    <button className={"addbutton"} onClick={handleAddTraining}>Add Training</button>
                 </div>
             )}
         </>
-            )
+    )
 }
+
 export default MyCalendar;

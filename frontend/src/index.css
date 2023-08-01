@@ -1,7 +1,6 @@
-.div1{
-    width: 420px;
-    height: 100px;
-    float: left;
+.div20{
+ text-align: center;
+    background-color:tan ;
 }
 .button{
     background-color: #007bff ;
@@ -12,8 +11,45 @@
 :root {
     width: 100%;
 }
-.art{
+
+.wetter{
+    background-color: red ;
+}
+.containar{
+    background-color:gray;
+}
+.newtraining{
+    text-align: center;
+    background-color: lightyellow;
 
 }
 
-
+ li {
+     list-style-type: none;
+    font-family: Arial, sans-serif;
+     font-size: 16px;
+     text-align: center;
+ }
+.time-label {
+    font-size: 18px;
+    font-weight: bold;
+}
+.select-time {
+    height: 22px;
+    font-size: 17px;
+}
+.time{
+    font-size: 100px;
+    color: red;
+}
+.addbutton{
+    font-size: 18px;
+}
+.space-div{
+    margin-bottom: 16px;
+}
+.list1{
+    text-align: center;
+    color:red;
+    font-size: 18px;
+}
