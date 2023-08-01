@@ -31,21 +31,26 @@
 .time-label {
     font-size: 18px;
     font-weight: bold;
+
 }
 .select-time {
     height: 22px;
     font-size: 17px;
 }
+
 .time{
     font-size: 100px;
     color: red;
 }
+
 .addbutton{
     font-size: 18px;
 }
+
 .space-div{
     margin-bottom: 16px;
 }
+
 .list1{
     text-align: center;
     color:red;

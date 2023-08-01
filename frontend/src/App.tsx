@@ -3,6 +3,7 @@ import './App.css'
 import axios from "axios";
 import {Training} from "./Training.tsx";
 import MyCalendar from "./MyCalender.tsx";
+
 function App() {
     const [trainings, setTrainings] = useState<Training[]>([]);
 
@@ -20,23 +21,22 @@ function App() {
         fetchTrainings();
     }, []);
 
-  return (
-    <>
+    return (
+        <>
 
-        <MyCalendar fetchTrainings={fetchTrainings}></MyCalendar>
-
-       <div  className={"div20"}>
-           <h2>Training Days</h2>
-           <ul>
-               {trainings.map((training) => (
-                   <li key={training.id}>
-                       {training.date} : {training.time}
-                   </li>
-               ))}
-           </ul>
-       </div>
+            <MyCalendar fetchTrainings={fetchTrainings}></MyCalendar>
+            <div className={"div20"}>
+                <h2>Training Days</h2>
+                <ul>
+                    {trainings.map((training) => (
+                        <li key={training.id}>
+                            {training.date} : {training.time}
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </>
-  )
+    )
 }
 
 export default App

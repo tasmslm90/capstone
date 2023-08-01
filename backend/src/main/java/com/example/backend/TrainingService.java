@@ -4,13 +4,12 @@ package com.example.backend;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class TrainingService {
+
     private final TrainingRepository trainingRepository;
     private final UuidService uuidService;
 

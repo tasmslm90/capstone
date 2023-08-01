@@ -11,9 +11,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @Document("training")
 public class Training {
- @Id
- private String id;
- private String date;
- private String time;
+    @Id
+    private String id;
+    private String date;
+    private String time;
 
 }

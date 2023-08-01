@@ -5,7 +5,7 @@ import momentPlugin from "@fullcalendar/moment";
 import {ChangeEvent, useState} from "react";
 import axios from "axios";
 
-function MyCalendar({ fetchTrainings }:{  fetchTrainings: () => void }) {
+function MyCalendar({fetchTrainings}: { fetchTrainings: () => void }) {
     const [clickedDates, setClickedDates] = useState<string[]>([]);
     const [selectedTime, setSelectedTime] = useState("");
     const [dateSelectionDisabled, setDateSelectionDisabled] = useState(false);
@@ -59,25 +59,25 @@ function MyCalendar({ fetchTrainings }:{  fetchTrainings: () => void }) {
     return (
         <>
             <div className={"container"}>
-                    <h1>Trainingsplaner</h1>
-                    {<FullCalendar
-                        plugins={[dayGridPlugin, momentPlugin]}
-                        initialView="dayGridMonth"
-                        firstDay={1}
-                       // locale={deLocale}
-                        dayCellContent={renderDayButton}
-                        aspectRatio={1.5}
-                        height={300}
-                        dateClick={handleDayClick}
+                <h1>Trainingsplaner</h1>
+                {<FullCalendar
+                    plugins={[dayGridPlugin, momentPlugin]}
+                    initialView="dayGridMonth"
+                    firstDay={1}
+                    // locale={deLocale}
+                    dayCellContent={renderDayButton}
+                    aspectRatio={1.5}
+                    height={300}
+                    dateClick={handleDayClick}
 
-                    />}
+                />}
             </div>
             {clickedDates.length > 0 && (
                 <div className={"newtraining"}>
                     <h2> Add new Training</h2>
-                    <ul >
+                    <ul>
                         {clickedDates.map((date, index) => (
-                            <li className={ "list1"} key={index}>{new Date(date).toLocaleDateString()}</li>
+                            <li className={"list1"} key={index}>{new Date(date).toLocaleDateString()}</li>
                         ))}
                     </ul>
                     <label className={"time-label"}>
