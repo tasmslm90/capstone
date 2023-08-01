@@ -5,14 +5,17 @@ import momentPlugin from "@fullcalendar/moment";
 import {ChangeEvent, useState} from "react";
 import axios from "axios";
 
-function MyCalendar() {
+function MyCalendar({ fetchTrainings }:{  fetchTrainings: () => void }) {
     const [clickedDates, setClickedDates] = useState<string[]>([]);
     const [selectedTime, setSelectedTime] = useState("");
+    const [dateSelectionDisabled, setDateSelectionDisabled] = useState(false);
 
     const handleDayClick = (dateClickInfo: any) => {
         const clickedDateStr = dateClickInfo.date.toISOString();
-        setClickedDates((prevDates) => [...prevDates, clickedDateStr]);
-
+        if (!dateSelectionDisabled) {
+            setClickedDates((prevDates) => [...prevDates, clickedDateStr]);
+            setDateSelectionDisabled(true);
+        }
     };
     const renderDayButton = (info: { dayNumberText: string, date: Date }) => {
         return (
@@ -44,6 +47,8 @@ function MyCalendar() {
         axios.post('/api/training', newTraining)
             .then((response) => {
                 console.log('Training wurde erfolgreich gespeichert:', response.data);
+                fetchTrainings();
+                setDateSelectionDisabled(false);
 
             })
             .catch((error) => {
@@ -54,7 +59,6 @@ function MyCalendar() {
     return (
         <>
             <div className={"container"}>
-                <div className={"clander1"}>
                     <h1>Trainingsplaner</h1>
                     {<FullCalendar
                         plugins={[dayGridPlugin, momentPlugin]}
@@ -62,11 +66,11 @@ function MyCalendar() {
                         firstDay={1}
                        // locale={deLocale}
                         dayCellContent={renderDayButton}
-                        aspectRatio={1}
+                        aspectRatio={1.5}
+                        height={300}
                         dateClick={handleDayClick}
 
                     />}
-                </div>
             </div>
             {clickedDates.length > 0 && (
                 <div className={"newtraining"}>

@@ -23,7 +23,7 @@ function App() {
   return (
     <>
 
-        <MyCalendar></MyCalendar>
+        <MyCalendar fetchTrainings={fetchTrainings}></MyCalendar>
 
        <div  className={"div20"}>
            <h2>Training Days</h2>
