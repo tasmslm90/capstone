@@ -9,7 +9,6 @@ function MyCalendar({fetchTrainings}: { fetchTrainings: () => void }) {
     const [clickedDates, setClickedDates] = useState<string[]>([]);
     const [selectedTime, setSelectedTime] = useState("");
     const [dateSelectionDisabled, setDateSelectionDisabled] = useState(false);
-
     const handleDayClick = (dateClickInfo: any) => {
         const clickedDateStr = dateClickInfo.date.toISOString();
         if (!dateSelectionDisabled) {
@@ -40,7 +39,7 @@ function MyCalendar({fetchTrainings}: { fetchTrainings: () => void }) {
     };
     const handleAddTraining = () => {
         const newTraining = {
-            date: clickedDates[clickedDates.length - 1],
+            date: clickedDates[clickedDates.length-1],
             time: selectedTime
         };
 
@@ -92,6 +91,7 @@ function MyCalendar({fetchTrainings}: { fetchTrainings: () => void }) {
                     </label>
                     <div className={"space-div"}></div>
                     <button className={"addbutton"} onClick={handleAddTraining}>Add Training</button>
+
                 </div>
             )}
         </>

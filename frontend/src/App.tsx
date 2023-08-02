@@ -20,6 +20,20 @@ function App() {
     useEffect(() => {
         fetchTrainings();
     }, []);
+    const handleDeleteTraining = (id: string) => {
+        axios.delete(`/api/training/${id}`)
+            .then((response) => {
+                console.log('Training wurde erfolgreich gelöscht:', response.data);
+                fetchTrainings();
+            })
+            .catch((error) => {
+                console.error('Fehler beim Löschen des Trainings:', error);
+            });
+    };
+
+    const handleChangeTraining = (id: string) => {
+        fetchTrainings();
+    };
 
     return (
         <>
@@ -27,13 +41,21 @@ function App() {
             <MyCalendar fetchTrainings={fetchTrainings}></MyCalendar>
             <div className={"div20"}>
                 <h2>Training Days</h2>
-                <ul>
+            {/*    <ul>
                     {trainings.map((training) => (
                         <li key={training.id}>
                             {training.date} : {training.time}
                         </li>
                     ))}
-                </ul>
+                </ul>*/}
+                {trainings.map((training) => (
+                    <div key={training.id} className="training-item">
+                        <span>{new Date(training.date).toLocaleDateString()} </span>
+                        <span>{training.time} </span>
+                        <button className="delete-button" onClick={() => handleDeleteTraining(training.id)}>🗑️</button>
+                        <button className="edit-button" onClick={() => handleChangeTraining(training.id)}>✏️</button>
+                    </div>
+                ))}
             </div>
         </>
     )
