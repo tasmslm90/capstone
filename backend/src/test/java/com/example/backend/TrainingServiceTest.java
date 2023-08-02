@@ -47,4 +47,5 @@ public class TrainingServiceTest {
         Training actual = trainingService.addTraining(trainingWithoutId);
         Assertions.assertEquals(expected, actual);
     }
+
 }

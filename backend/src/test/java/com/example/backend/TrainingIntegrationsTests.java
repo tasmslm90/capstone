@@ -43,7 +43,7 @@ public class TrainingIntegrationsTests {
     @DirtiesContext
     void test_addTraining() throws Exception {
         String requestBody = """
-                {"id": "12","date":"22.08.2023","time":"18:30"}
+                {"date":"22.08.2023","time":"18:30"}
                 """;
         ResultActions resultActions = mockMvc.perform(post("/api/training")
                 .contentType(MediaType.APPLICATION_JSON)
