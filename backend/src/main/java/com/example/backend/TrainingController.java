@@ -49,7 +49,7 @@ public class TrainingController {
 @PutMapping("/{id}")
 public ResponseEntity<Training> updateTraining(@PathVariable String id, @RequestBody Training updatedTraining) {
     try {
-        Training training = trainingService.updateTraining(updatedTraining,id);
+        Training training = trainingService.updateTraining(updatedTraining);
         if (training != null) {
             return ResponseEntity.ok(training);
         } else {

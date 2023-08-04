@@ -8,7 +8,7 @@ function MyCalendar({ fetchTrainings}: { fetchTrainings: () => void}) {
     const [clickedDates, setClickedDates] = useState<Date[]>([]);
     const [dateSelectionDisabled, setDateSelectionDisabled] = useState(false);
     const [selectedArt, setSelectedArt] = useState("");
-    const availableArtOptions = ["Taktik", "Kraft", "Kondition", "Passspiel", "Other"];
+    const availableArtOptions = ["Fußball", "Basketball", "Handball", "Tennis"];
 
 
     const handleDayClick = (dateClickInfo: any) => {
@@ -59,7 +59,7 @@ function MyCalendar({ fetchTrainings}: { fetchTrainings: () => void}) {
                 fetchTrainings();
                 setDateSelectionDisabled(false);
                 setClickedDates([]);
-                //setSelectedArt('');
+                setSelectedArt('');
 
 
             })
@@ -137,8 +137,8 @@ function MyCalendar({ fetchTrainings}: { fetchTrainings: () => void}) {
                         </div>
                     )}
                     <div className={"space-div"}></div>
-                    <button className={"addbutton"} onClick={handleAddTraining}>Add Training</button>
-                    <button className={"cancelbutton"} onClick={handleCancel}>Cancel</button>
+                        <button className={"addbutton"} onClick={handleAddTraining}>Add Training</button>
+                        <button className={"cancelbutton"} onClick={handleCancel}>Cancel</button>
                 </div>
             )}
         </>

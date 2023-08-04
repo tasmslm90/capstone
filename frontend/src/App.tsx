@@ -1,12 +1,10 @@
-import {useEffect, useRef, useState} from 'react'
+import {useEffect,  useState} from 'react'
 import './App.css'
 import axios from "axios";
 import {Training} from "./Training.tsx";
 import MyCalendar from "./MyCalender.tsx";
-import myCalender from "./MyCalender.tsx";
 
 function App() {
-    const myCalendarRef = useRef(null);
     const [trainings, setTrainings] = useState<Training[]>([]);
 
     const fetchTrainings = async () => {
@@ -32,6 +30,22 @@ function App() {
                 console.error('Fehler beim Löschen des Trainings:', error);
             });
     };
+    const handleEditTraining = (id: string) => {
+        const editedTraining = trainings.find((training: Training) => training.id === id);
+        if (editedTraining) {
+
+            editedTraining.date = new Date(editedTraining.date).toLocaleDateString();
+                console.log(editedTraining.date)
+            axios.put(`/api/training/${id}`, editedTraining)
+                .then(response => {
+                    console.log('Training wurde bearbeitet:', response.data);
+                    fetchTrainings();
+                })
+                .catch(error => {
+                    console.error('Fehler beim Bearbeiten des Trainings:', error);
+                });
+        }
+ };
     return (
         <>
 

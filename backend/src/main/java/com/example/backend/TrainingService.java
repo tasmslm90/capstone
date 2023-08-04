@@ -28,9 +28,10 @@ public class TrainingService {
         trainingRepository.save(training);
         return training;
     }
-    public Training updateTraining(Training training, String id) throws Exception {
-        Training updatedTraining = trainingRepository.findById(id).orElseThrow(() -> new Exception("training nihct vorhanden"));
+    public Training updateTraining(Training training) throws Exception {
+        Training updatedTraining = trainingRepository.findById(training.getId()).orElseThrow(() -> new Exception("training nihct vorhanden"));
         updatedTraining.setDate(training.getDate());
+        updatedTraining.setArt(training.getArt());
         return trainingRepository.save(updatedTraining);
     }
 
