@@ -4,11 +4,14 @@ import momentPlugin from "@fullcalendar/moment";
 //import deLocale from '@fullcalendar/core/locales/de'; deutsch
 import {ChangeEvent, useState} from "react";
 import axios from "axios";
-function MyCalendar({fetchTrainings }: { fetchTrainings: () => void}) {
+function MyCalendar({ fetchTrainings}: { fetchTrainings: () => void}) {
     const [clickedDates, setClickedDates] = useState<Date[]>([]);
     const [dateSelectionDisabled, setDateSelectionDisabled] = useState(false);
+    const [selectedArt, setSelectedArt] = useState("");
+    const availableArtOptions = ["Taktik", "Kraft", "Kondition", "Passspiel", "Other"];
 
-      const handleDayClick = (dateClickInfo: any) => {
+
+    const handleDayClick = (dateClickInfo: any) => {
         const clickedDateStr = dateClickInfo.date;
         if (!dateSelectionDisabled) {
             setClickedDates((prevDates) => [...prevDates, clickedDateStr]);
@@ -47,6 +50,7 @@ function MyCalendar({fetchTrainings }: { fetchTrainings: () => void}) {
     const handleAddTraining = () => {
         const newTraining = {
             date: clickedDates[clickedDates.length-1],
+            art: selectedArt,
         };
 
         axios.post('/api/training', newTraining)
@@ -55,6 +59,7 @@ function MyCalendar({fetchTrainings }: { fetchTrainings: () => void}) {
                 fetchTrainings();
                 setDateSelectionDisabled(false);
                 setClickedDates([]);
+                //setSelectedArt('');
 
 
             })
@@ -65,6 +70,25 @@ function MyCalendar({fetchTrainings }: { fetchTrainings: () => void}) {
     const handleCancel = () => {
         setDateSelectionDisabled(false);
         setClickedDates([]);
+    };
+
+    const handleArtChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const value = event.target.value;
+        setSelectedArt(value)
+    };
+
+    const renderArtCheckbox = (art: string) => {
+        return (
+            <label key={art} className={"art-checkbox"}>
+                <input
+                    type="checkbox"
+                    value={art}
+                    checked={selectedArt.includes(art)}
+                    onChange={handleArtChange}
+                />
+                {art}
+            </label>
+        );
     };
 
     return (
@@ -91,7 +115,12 @@ function MyCalendar({fetchTrainings }: { fetchTrainings: () => void}) {
                         {clickedDates.map((date, index) => (
                             <li className={"list1"} key={index}>{new Date(date).toLocaleDateString()}</li>
                         ))}
+
                     </ul>
+                    <div className={"art-options"}>
+                        {availableArtOptions.map((art) =>  renderArtCheckbox(art))}
+                    </div>
+
                     <label className={"time-label"}>
                         <strong> Time : </strong>
                         <select className={"select-time"} onChange={handleTimeChange}>
@@ -102,6 +131,11 @@ function MyCalendar({fetchTrainings }: { fetchTrainings: () => void}) {
                             ))}
                         </select>
                     </label>
+                    {selectedArt && (
+                        <div className={"selected-art"}>
+                            <strong>Selected Art: </strong> {selectedArt}
+                        </div>
+                    )}
                     <div className={"space-div"}></div>
                     <button className={"addbutton"} onClick={handleAddTraining}>Add Training</button>
                     <button className={"cancelbutton"} onClick={handleCancel}>Cancel</button>

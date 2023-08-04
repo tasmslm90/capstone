@@ -14,5 +14,6 @@ public class Training {
     @Id
     private String id;
     private String date;
+    private String art;
 
 }

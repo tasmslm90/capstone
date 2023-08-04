@@ -24,6 +24,7 @@ public class TrainingService {
         Training training = new Training();
         training.setId(id);
         training.setDate(trainingWithoutId.getDate());
+        training.setArt(trainingWithoutId.getArt());
         trainingRepository.save(training);
         return training;
     }

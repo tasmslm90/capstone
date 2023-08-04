@@ -43,12 +43,13 @@ public class TrainingIntegrationsTests {
     @DirtiesContext
     void test_addTraining() throws Exception {
         String requestBody = """
-                {"date":"22.08.2023","time":"18:30"}
+                {"date":"22.08.2023","art":"Taktik"}
                 """;
         ResultActions resultActions = mockMvc.perform(post("/api/training")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(requestBody));
         resultActions.andExpect(status().isOk());
         resultActions.andExpect(jsonPath("$.date").value("22.08.2023"));
+        resultActions.andExpect(jsonPath("$.art").value("Taktik"));
     }
 }

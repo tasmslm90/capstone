@@ -16,13 +16,13 @@ public class TrainingServiceTest {
     @Test
     void test_getAllTraining() {
         when(trainingRepository.findAll()).thenReturn(Arrays.asList(
-                new Training("1", "02.08.20023", "18:30"),
-                new Training("2", "04.08.20023", "19:30")
+                new Training("1", "02.08.20023", "Taktik"),
+                new Training("2", "04.08.20023", "Kondition")
         ));
         List<Training> actual = trainingService.getAllTrainings();
         List<Training> expected = Arrays.asList(
-                new Training("1", "02.08.20023", "18:30"),
-                new Training("2", "04.08.20023", "19:30")
+                new Training("1", "02.08.20023", "Taktik"),
+                new Training("2", "04.08.20023", "Kondition")
         );
         Assertions.assertEquals(expected, actual);
     }
@@ -40,8 +40,8 @@ public class TrainingServiceTest {
 
     @Test
     void test_addTraining() {
-        TrainingWithoutId trainingWithoutId = new TrainingWithoutId("02.08.1023");
-        Training expected = new Training("1111", trainingWithoutId.getDate());
+        TrainingWithoutId trainingWithoutId = new TrainingWithoutId("02.08.1023","Taktik");
+        Training expected = new Training("1111", trainingWithoutId.getDate(),trainingWithoutId.getArt());
         when(uuidService.generateUUID()).thenReturn("1111");
         when(trainingRepository.save(expected)).thenReturn(expected);
         Training actual = trainingService.addTraining(trainingWithoutId);

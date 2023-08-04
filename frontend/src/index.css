@@ -46,6 +46,12 @@
 .addbutton{
     font-size: 18px;
 }
+.training-container {
+    background-color:antiquewhite;
+    border: 1px solid black;
+    padding: 10px; /* Optional: Füge Abstand zum Inhalt hinzu */
+    margin-bottom: 10px; /* Optional: Füge Abstand zwischen den Trainings hinzu */
+}
 
 .space-div{
     margin-bottom: 16px;
@@ -56,3 +62,10 @@
     color:red;
     font-size: 18px;
 }
+/*.training-info {
+    border: 1px solid #ccc;
+    padding: 10px; /* Optional: Füge Abstand zum Inhalt hinzu */
+    /*margin-bottom: 10px; /* Optional: Füge Abstand zwischen den Trainingsinformationen hinzu */
+/*}
+
+
