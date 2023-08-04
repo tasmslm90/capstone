@@ -31,34 +31,20 @@ function App() {
             });
     };
 
-    const handleChangeTraining = (id: string) => {
-        fetchTrainings();
-    };
-
     return (
         <>
 
-            <MyCalendar fetchTrainings={fetchTrainings}></MyCalendar>
+            <MyCalendar  fetchTrainings={fetchTrainings}></MyCalendar>
             <div className={"div20"}>
                 <h2>Training Days</h2>
-            {/*    <ul>
-                    {trainings.map((training) => (
-                        <li key={training.id}>
-                            {training.date} : {training.time}
-                        </li>
-                    ))}
-                </ul>*/}
                 {trainings.map((training) => (
                     <div key={training.id} className="training-item">
-                        <span>{new Date(training.date).toLocaleDateString()} </span>
-                        <span>{training.time} </span>
+                        <span>{new Date(training.date).toLocaleString().slice(0,16)} </span>
                         <button className="delete-button" onClick={() => handleDeleteTraining(training.id)}>🗑️</button>
-                        <button className="edit-button" onClick={() => handleChangeTraining(training.id)}>✏️</button>
                     </div>
                 ))}
             </div>
         </>
     )
 }
-
 export default App

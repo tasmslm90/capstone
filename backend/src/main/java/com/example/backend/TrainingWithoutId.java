@@ -10,6 +10,4 @@ import lombok.NoArgsConstructor;
 public class TrainingWithoutId {
 
     private String date;
-    private String time;
-
 }

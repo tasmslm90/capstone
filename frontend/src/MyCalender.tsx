@@ -4,13 +4,12 @@ import momentPlugin from "@fullcalendar/moment";
 //import deLocale from '@fullcalendar/core/locales/de'; deutsch
 import {ChangeEvent, useState} from "react";
 import axios from "axios";
-
-function MyCalendar({fetchTrainings}: { fetchTrainings: () => void }) {
-    const [clickedDates, setClickedDates] = useState<string[]>([]);
-    const [selectedTime, setSelectedTime] = useState("");
+function MyCalendar({fetchTrainings }: { fetchTrainings: () => void}) {
+    const [clickedDates, setClickedDates] = useState<Date[]>([]);
     const [dateSelectionDisabled, setDateSelectionDisabled] = useState(false);
-    const handleDayClick = (dateClickInfo: any) => {
-        const clickedDateStr = dateClickInfo.date.toISOString();
+
+      const handleDayClick = (dateClickInfo: any) => {
+        const clickedDateStr = dateClickInfo.date;
         if (!dateSelectionDisabled) {
             setClickedDates((prevDates) => [...prevDates, clickedDateStr]);
             setDateSelectionDisabled(true);
@@ -24,7 +23,15 @@ function MyCalendar({fetchTrainings}: { fetchTrainings: () => void }) {
         );
     };
     const handleTimeChange = (event: ChangeEvent<HTMLSelectElement>) => {
-        setSelectedTime(event.target.value);
+        const hoursandmin = event.target.value.split(":");
+        const hours = Number(hoursandmin[0]);
+        const min = Number(hoursandmin[1]);
+        const date = clickedDates[clickedDates.length-1]
+        date.setHours(hours,min);
+        setClickedDates((prevDates) =>{
+            prevDates[prevDates.length-1]=date;
+            return prevDates
+        })
     };
     const generateTimeOptions = () => {
         const timeOptions = [];
@@ -40,7 +47,6 @@ function MyCalendar({fetchTrainings}: { fetchTrainings: () => void }) {
     const handleAddTraining = () => {
         const newTraining = {
             date: clickedDates[clickedDates.length-1],
-            time: selectedTime
         };
 
         axios.post('/api/training', newTraining)
@@ -48,11 +54,17 @@ function MyCalendar({fetchTrainings}: { fetchTrainings: () => void }) {
                 console.log('Training wurde erfolgreich gespeichert:', response.data);
                 fetchTrainings();
                 setDateSelectionDisabled(false);
+                setClickedDates([]);
+
 
             })
             .catch((error) => {
                 console.error('Fehler beim Speichern des Trainings:', error);
             });
+    };
+    const handleCancel = () => {
+        setDateSelectionDisabled(false);
+        setClickedDates([]);
     };
 
     return (
@@ -71,6 +83,7 @@ function MyCalendar({fetchTrainings}: { fetchTrainings: () => void }) {
 
                 />}
             </div>
+
             {clickedDates.length > 0 && (
                 <div className={"newtraining"}>
                     <h2> Add new Training</h2>
@@ -81,7 +94,7 @@ function MyCalendar({fetchTrainings}: { fetchTrainings: () => void }) {
                     </ul>
                     <label className={"time-label"}>
                         <strong> Time : </strong>
-                        <select className={"select-time"} value={selectedTime} onChange={handleTimeChange}>
+                        <select className={"select-time"} onChange={handleTimeChange}>
                             {generateTimeOptions().map((timeOption) => (
                                 <option className={"time"} key={timeOption} value={timeOption}>
                                     {timeOption}
@@ -91,7 +104,7 @@ function MyCalendar({fetchTrainings}: { fetchTrainings: () => void }) {
                     </label>
                     <div className={"space-div"}></div>
                     <button className={"addbutton"} onClick={handleAddTraining}>Add Training</button>
-
+                    <button className={"cancelbutton"} onClick={handleCancel}>Cancel</button>
                 </div>
             )}
         </>

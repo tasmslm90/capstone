@@ -1,11 +1,15 @@
 package com.example.backend;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/training")
@@ -24,7 +28,6 @@ public class TrainingController {
 
         TrainingWithoutId training = new TrainingWithoutId();
         training.setDate(trainingWithoutId.getDate());
-        training.setTime(trainingWithoutId.getTime());
         Training savedTraining = trainingService.addTraining(training);
         return savedTraining;
     }

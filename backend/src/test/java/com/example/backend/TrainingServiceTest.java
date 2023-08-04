@@ -40,8 +40,8 @@ public class TrainingServiceTest {
 
     @Test
     void test_addTraining() {
-        TrainingWithoutId trainingWithoutId = new TrainingWithoutId("02.08.1023", "18:30");
-        Training expected = new Training("1111", trainingWithoutId.getDate(), trainingWithoutId.getTime());
+        TrainingWithoutId trainingWithoutId = new TrainingWithoutId("02.08.1023");
+        Training expected = new Training("1111", trainingWithoutId.getDate());
         when(uuidService.generateUUID()).thenReturn("1111");
         when(trainingRepository.save(expected)).thenReturn(expected);
         Training actual = trainingService.addTraining(trainingWithoutId);

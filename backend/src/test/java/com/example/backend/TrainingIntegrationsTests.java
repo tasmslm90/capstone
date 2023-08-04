@@ -50,6 +50,5 @@ public class TrainingIntegrationsTests {
                 .content(requestBody));
         resultActions.andExpect(status().isOk());
         resultActions.andExpect(jsonPath("$.date").value("22.08.2023"));
-        resultActions.andExpect(jsonPath("$.time").value("18:30"));
     }
 }
