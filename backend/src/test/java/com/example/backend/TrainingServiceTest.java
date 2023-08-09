@@ -47,5 +47,10 @@ public class TrainingServiceTest {
         Training actual = trainingService.addTraining(trainingWithoutId);
         Assertions.assertEquals(expected, actual);
     }
+    @Test
+    void test_deleteAnimal() {
+        trainingService.deleteTraining("1");
+        verify(trainingRepository).deleteById("1");
+    }
 
 }
