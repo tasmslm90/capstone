@@ -8,6 +8,7 @@ import {Route, Routes, useNavigate} from "react-router-dom";
 import HomePage from "./HomePage.tsx";
 import ProtectedRoutes from "./ProtectedRoutes.tsx";
 import PlayerHomepage from "./Player-Homepage.tsx";
+import LogoutButton from "./LogoutButton.tsx";
 
 function App() {
     const [trainings, setTrainings] = useState<Training[]>([]);
@@ -42,6 +43,9 @@ function me(){
         me()
         fetchTrainings();
     }, []);
+    const isLoginPage = () => {
+        return location.pathname === '/login';
+    };
 
     return (
         <>
@@ -53,6 +57,7 @@ function me(){
                 </Route>
                 <Route path ="/login" element={<LoginPage onLogin={login}></LoginPage>}/>
             </Routes>
+            {!isLoginPage() && <LogoutButton onLogoutSuccess={() => setUser(undefined)}/>}
 
 
         </>

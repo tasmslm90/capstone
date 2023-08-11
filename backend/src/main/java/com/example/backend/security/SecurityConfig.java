@@ -1,5 +1,6 @@
 package com.example.backend.security;
 
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -38,9 +39,16 @@ public class SecurityConfig {
                                 .requestMatchers("api/users/me").permitAll()
                                 .anyRequest().permitAll()
                 )
-               // .formLogin(Customizer.withDefaults())
-                .logout(logout ->logout.logoutUrl("/api/users/logout"))
+
+                .logout(logout -> logout.logoutUrl("/api/users/logout")
+                .deleteCookies("JSESSIONID")
+                .logoutSuccessHandler((request, response, authentication) ->
+                        response.setStatus(HttpServletResponse.SC_OK)
+                ))
                 .build();
+
+               // .formLogin(Customizer.withDefaults())
+
     }
     @Bean
     public PasswordEncoder passwordEncoder(){

@@ -22,4 +22,9 @@ public class MongoUserController {
     public String login() {
         return SecurityContextHolder.getContext().getAuthentication().getName();
     }
+
+    @PostMapping("/logout")
+    public void logout() {
+        SecurityContextHolder.clearContext();
+    }
 }

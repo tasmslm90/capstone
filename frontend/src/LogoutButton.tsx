@@ -1,12 +1,12 @@
-import React from "react";
 import axios from "axios";
-import {useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 type LogoutButtonProps = {
     onLogoutSuccess: () => void;
 };
 
-const LogoutButton: React.FC<LogoutButtonProps> = ({ onLogoutSuccess }) => {
+const LogoutButton: React.FC<LogoutButtonProps> = ({onLogoutSuccess}) => {
+
     const navigate = useNavigate();
 
     const handleLogout = async () => {

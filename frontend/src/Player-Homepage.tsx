@@ -1,14 +1,9 @@
 import axios from "axios";
 import {useEffect, useState} from "react";
 import {Training} from "./Training.tsx";
-import LogoutButton from "./LogoutButton.tsx";
-import { useNavigate } from "react-router-dom";
-
 
 export default function PlayerHomepage() {
     const [trainings, setTrainings] = useState<Training[]>([]);
-    const [isLoggedIn, setIsLoggedIn] = useState(true);
-    const navigate = useNavigate();
     const fetchTrainings = async () => {
         try {
             const response = await axios.get("/api/training");
@@ -21,12 +16,6 @@ export default function PlayerHomepage() {
     useEffect(() => {
         fetchTrainings();
     }, []);
-
-    const handleLogoutSuccess = () => {
-        console.log("Handle logout success called");
-        setIsLoggedIn(false);
-        navigate("/login")
-    };
 
     return (
         <>
@@ -42,7 +31,6 @@ export default function PlayerHomepage() {
                     ))}
                 </ul>
             </div>
-            <LogoutButton onLogoutSuccess={handleLogoutSuccess} />
         </>
     );
 }
