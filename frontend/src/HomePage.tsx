@@ -6,13 +6,14 @@ import TrainingCard from "./TrainingCard.tsx";
 
 
 type Props = {
+    editedTraining : (editedTraining: Training)=> void
     trainings : Training[],
     user?: UserData,
     fetchTrainings: () => Promise<void>
 
 }
 
-function HomePage({trainings,user,fetchTrainings}: Props,) {
+function HomePage(props: Props,) {
 
     const navigate = useNavigate();
 
@@ -23,12 +24,12 @@ function HomePage({trainings,user,fetchTrainings}: Props,) {
     };
     return (
         <>
-            <MyCalendar fetchTrainings={fetchTrainings} ></MyCalendar>
+            <MyCalendar fetchTrainings={props.fetchTrainings} ></MyCalendar>
             <div className={"div20"}>
                 <h3>Training Days</h3>
-                {trainings.map((training) => (
+                {props.trainings.map((training) => (
 
-                    <TrainingCard training={training} onDeleteTraining={fetchTrainings} user={user}/>
+                    <TrainingCard training={training} onDeleteTraining={props.fetchTrainings} user={props.user} editedTraining={props.editedTraining} />
 
 
                 ))}

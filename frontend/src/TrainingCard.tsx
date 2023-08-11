@@ -4,6 +4,7 @@ import EditForm from "./EditForm.tsx";
 import axios from "axios";
 import {UserData} from "./UserData.tsx";
 type Props ={
+    editedTraining : (editedTraining: Training)=> void
     training:Training
     onDeleteTraining :() => Promise<void>
     user?:UserData
@@ -45,7 +46,7 @@ type Props ={
                     <span>{props.user?.name}</span>
                 </div>
 
-            </div> : <EditForm training={props.training}/>}
+            </div> : <EditForm training={props.training} editedTraining ={props.editedTraining}/>}
 
             <div className="button-group">
                 <button className="edit-button" onClick={() => setIsEdit(!isEdit)}>🖊️

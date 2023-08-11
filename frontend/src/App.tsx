@@ -46,6 +46,20 @@ function me(){
         })
 }
 
+    function editedTraining(editedTraining: Training){
+
+        axios.put("/api/training/" + editedTraining.id,editedTraining)
+            .then((response)=>
+                setTrainings((prevState)=> prevState.map((training)=> {
+                    if(training.id === editedTraining.id){
+                        return response.data;
+                    } else{
+                        return training;
+                    }
+                }))
+            )
+    }
+
     useEffect(() => {
         me()
         fetchTrainings();
@@ -59,7 +73,7 @@ function me(){
         <>
             <Routes>
                 <Route element={<ProtectedRoutes user={user}/>}>
-                    <Route path="/" element={<HomePage trainings={trainings} user={user} fetchTrainings={fetchTrainings}/>}/>
+                    <Route path="/" element={<HomePage trainings={trainings} user={user} fetchTrainings={fetchTrainings} editedTraining={editedTraining}/>}/>
                     <Route path = "/kalender" element={<MyCalendar fetchTrainings={fetchTrainings} ></MyCalendar>}/>
                     <Route path = "/player-homepage" element={<PlayerHomepage ></PlayerHomepage>}/>
                 </Route>

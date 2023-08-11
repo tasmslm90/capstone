@@ -12,9 +12,11 @@ const LogoutButton: React.FC<LogoutButtonProps> = ({onLogoutSuccess}) => {
     const handleLogout = async () => {
         try {
             await axios.post("/api/users/logout");
+            await axios.get("/api/users/me");
             console.log("Logout erfolgreich");
             onLogoutSuccess();
             navigate("/login");
+
         } catch (error) {
             console.error("Fehler beim Ausloggen:", error);
         }
