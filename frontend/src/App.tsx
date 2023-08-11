@@ -9,10 +9,11 @@ import HomePage from "./HomePage.tsx";
 import ProtectedRoutes from "./ProtectedRoutes.tsx";
 import PlayerHomepage from "./Player-Homepage.tsx";
 import LogoutButton from "./LogoutButton.tsx";
+import {UserData} from "./UserData.tsx";
 
 function App() {
     const [trainings, setTrainings] = useState<Training[]>([]);
-    const [user,setUser]= useState<string>()
+    const [user,setUser]= useState<UserData>()
 
     const navigate = useNavigate()
 
@@ -29,7 +30,13 @@ function login(username:string,password:string){
     axios.post("/api/users/login",null,{auth: {username, password}})
         .then((response) =>{
             setUser(response.data)
-            navigate("/")
+         if(response.data.role === "PLAYER"){
+             navigate("/player-homepage")
+         }else if(response.data.role === "TRAINER"){
+             navigate("/")
+         }else {
+             navigate("/login")
+         }
         })
 }
 function me(){
@@ -42,6 +49,7 @@ function me(){
     useEffect(() => {
         me()
         fetchTrainings();
+
     }, []);
     const isLoginPage = () => {
         return location.pathname === '/login';

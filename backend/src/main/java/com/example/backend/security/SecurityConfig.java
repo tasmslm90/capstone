@@ -47,8 +47,6 @@ public class SecurityConfig {
                 ))
                 .build();
 
-               // .formLogin(Customizer.withDefaults())
-
     }
     @Bean
     public PasswordEncoder passwordEncoder(){

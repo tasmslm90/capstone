@@ -1,33 +1,21 @@
 import {Training} from "./Training.tsx";
-import axios from "axios";
 import MyCalendar from "./MyCalender.tsx";
 import { useNavigate } from "react-router-dom";
+import {UserData} from "./UserData.tsx";
+import TrainingCard from "./TrainingCard.tsx";
+
 
 type Props = {
     trainings : Training[],
-    user?: string,
+    user?: UserData,
     fetchTrainings: () => Promise<void>
-
 
 }
 
 function HomePage({trainings,user,fetchTrainings}: Props,) {
 
     const navigate = useNavigate();
-    const handleDeleteTraining = (id: string) => {
-        axios.delete(`/api/training/${id}`)
-            .then((response) => {
-                console.log('Training wurde erfolgreich gelöscht:', response.data);
-                fetchTrainings();
-            })
-            .catch((error) => {
-                console.error('Fehler beim Löschen des Trainings:', error);
-            });
-    };
-    const handleEditTraining = (id: string) => {
-        id= "s"
-        return id
-    };
+
 
     const handleGoToPlayerHomepage = () => {
 
@@ -39,32 +27,10 @@ function HomePage({trainings,user,fetchTrainings}: Props,) {
             <div className={"div20"}>
                 <h3>Training Days</h3>
                 {trainings.map((training) => (
-                    <div key={training.id} className="training-item">
-                        <div className="training-container">
-                            <div className="training-info">
-                                <label>Datum : </label>
-                                <span>{new Date(training.date).toLocaleDateString()}</span>
-                            </div>
-                            <div className="training-info">
-                                <label>Uhrzeit : </label>
-                                <span>{new Date(training.date).toLocaleTimeString().slice(0, 5)}</span>
-                            </div>
-                            <div className="training-info">
-                                <label>Art : </label>
-                                <span>{training.art}</span>
-                            </div>
-                            <div className="trainer-info">
-                                <label>Trainer : </label>
-                                <span>{user}</span>
-                            </div>
-                            <div className="button-group">
-                                <button className="edit-button" onClick={() => handleEditTraining(training.id)}>🖊️
-                                </button>
-                                <button className="delete-button" onClick={() => handleDeleteTraining(training.id)}>🗑️
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+
+                    <TrainingCard training={training} onDeleteTraining={fetchTrainings} user={user}/>
+
+
                 ))}
             </div>
                 <div className="button-group">
@@ -75,5 +41,4 @@ function HomePage({trainings,user,fetchTrainings}: Props,) {
         </>
     );
 }
-
 export default HomePage;
