@@ -37,11 +37,7 @@ function HomePage({trainings,user,fetchTrainings}: Props,) {
         navigate("/player-homepage");
     };
 
-    const handleLogoutSuccess = () => {
-        console.log("Handle logout success called");
-        setIsLoggedIn(false);
-        navigate("/login");
-    };
+
     console.log("Rendering component. isLoggedIn:", isLoggedIn);
     return (
         <>
