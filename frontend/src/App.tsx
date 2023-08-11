@@ -7,6 +7,7 @@ import LoginPage from "./LoginPage.tsx";
 import {Route, Routes, useNavigate} from "react-router-dom";
 import HomePage from "./HomePage.tsx";
 import ProtectedRoutes from "./ProtectedRoutes.tsx";
+import PlayerHomepage from "./Player-Homepage.tsx";
 
 function App() {
     const [trainings, setTrainings] = useState<Training[]>([]);
@@ -42,13 +43,13 @@ function me(){
         fetchTrainings();
     }, []);
 
-
     return (
         <>
             <Routes>
                 <Route element={<ProtectedRoutes user={user}/>}>
                     <Route path="/" element={<HomePage trainings={trainings} user={user} fetchTrainings={fetchTrainings}/>}/>
                     <Route path = "/kalender" element={<MyCalendar fetchTrainings={fetchTrainings} ></MyCalendar>}/>
+                    <Route path = "/player-homepage" element={<PlayerHomepage ></PlayerHomepage>}/>
                 </Route>
                 <Route path ="/login" element={<LoginPage onLogin={login}></LoginPage>}/>
             </Routes>

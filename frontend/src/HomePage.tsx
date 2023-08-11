@@ -1,6 +1,9 @@
 import {Training} from "./Training.tsx";
 import axios from "axios";
 import MyCalendar from "./MyCalender.tsx";
+import LogoutButton from "./LogoutButton.tsx";
+import {useState} from "react";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
     trainings : Training[],
@@ -11,6 +14,9 @@ type Props = {
 }
 
 function HomePage({trainings,user,fetchTrainings}: Props,) {
+
+    const [isLoggedIn, setIsLoggedIn] = useState(true);
+    const navigate = useNavigate();
     const handleDeleteTraining = (id: string) => {
         axios.delete(`/api/training/${id}`)
             .then((response) => {
@@ -25,11 +31,23 @@ function HomePage({trainings,user,fetchTrainings}: Props,) {
         id= "s"
         return id
     };
+
+    const handleGoToPlayerHomepage = () => {
+
+        navigate("/player-homepage");
+    };
+
+    const handleLogoutSuccess = () => {
+        console.log("Handle logout success called");
+        setIsLoggedIn(false);
+        navigate("/login");
+    };
+    console.log("Rendering component. isLoggedIn:", isLoggedIn);
     return (
         <>
             <MyCalendar fetchTrainings={fetchTrainings} ></MyCalendar>
             <div className={"div20"}>
-                <h2>Training Days</h2>
+                <h3>Training Days</h3>
                 {trainings.map((training) => (
                     <div key={training.id} className="training-item">
                         <div className="training-container">
@@ -59,6 +77,12 @@ function HomePage({trainings,user,fetchTrainings}: Props,) {
                     </div>
                 ))}
             </div>
+                <div className="button-group">
+                    <LogoutButton onLogoutSuccess={handleLogoutSuccess} />
+                    <button className="player-homepage-button" onClick={handleGoToPlayerHomepage}>
+                        Go to Player Homepage
+                    </button>
+                </div>
         </>
     );
 }

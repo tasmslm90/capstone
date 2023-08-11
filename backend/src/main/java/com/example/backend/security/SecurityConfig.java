@@ -39,6 +39,7 @@ public class SecurityConfig {
                                 .anyRequest().permitAll()
                 )
                // .formLogin(Customizer.withDefaults())
+                .logout(logout ->logout.logoutUrl("/api/users/logout"))
                 .build();
     }
     @Bean
