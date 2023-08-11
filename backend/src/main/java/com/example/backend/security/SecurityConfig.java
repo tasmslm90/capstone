@@ -26,19 +26,19 @@ public class SecurityConfig {
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                         .csrfTokenRequestHandler(requestHandler))
                 .httpBasic(Customizer.withDefaults())
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
-                .and()
+                .sessionManagement(httpSecuritySessionManagementConfigurer ->
+                        httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
                 .authorizeHttpRequests(httpRequests ->
                         httpRequests
-                                //.requestMatchers(HttpMethod.GET,"/api/training").permitAll()
-                                //.requestMatchers("/api/training").authenticated()
+                                .requestMatchers(HttpMethod.GET,"/api/training").permitAll()
+                                .requestMatchers("/api/training").authenticated()
 
-                                //.requestMatchers(HttpMethod.GET,"/api/training/**").permitAll()
+                                .requestMatchers(HttpMethod.GET,"/api/training/**").permitAll()
                                 .requestMatchers("/api/training/**").authenticated()
                                 .requestMatchers("api/users/me").permitAll()
                                 .anyRequest().permitAll()
                 )
-                .formLogin(Customizer.withDefaults())
+               // .formLogin(Customizer.withDefaults())
                 .build();
     }
     @Bean
