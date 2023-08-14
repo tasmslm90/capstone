@@ -90,21 +90,22 @@ function MyCalendar({ fetchTrainings}: { fetchTrainings: () => void}) {
             </label>
         );
     };
+const calendarOptions= {
+    plugins:[dayGridPlugin, momentPlugin],
+    initialView:"dayGridMonth",
+    firstDay:1,
+    // locale={deLocale}
+    dayCellContent:renderDayButton,
+    aspectRatio:1.5,
+    height:300,
+    dateClick:handleDayClick
 
+}
     return (
         <>
             <div className={"container"}>
                 <h1>Trainingsplaner</h1>
-                {<FullCalendar
-                    plugins={[dayGridPlugin, momentPlugin]}
-                    initialView="dayGridMonth"
-                    firstDay={1}
-                    // locale={deLocale}
-                    dayCellContent={renderDayButton}
-                    aspectRatio={1.5}
-                    height={300}
-                    dateClick={handleDayClick}
-
+                {<FullCalendar {...calendarOptions}
                 />}
             </div>
 
