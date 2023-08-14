@@ -2,8 +2,10 @@ import axios from "axios";
 import {useEffect, useState} from "react";
 import {Training} from "./Training.tsx";
 
+
 export default function PlayerHomepage() {
     const [trainings, setTrainings] = useState<Training[]>([]);
+    const [status, setStatus] = useState<string>("");
     const fetchTrainings = async () => {
         try {
             const response = await axios.get("/api/training");
@@ -17,20 +19,44 @@ export default function PlayerHomepage() {
         fetchTrainings();
     }, []);
 
+
+
     return (
         <>
-            <div>
+            <div className="training-container">
                 <h1>Your Trainings</h1>
-                <ul>
+                <table className="training-table">
+                    <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
                     {trainings.map((training) => (
-                        <li key={training.id}>
-                            <p>Date: {new Date(training.date).toLocaleDateString()}</p>
-                            <p>Time: {new Date(training.date).toLocaleTimeString().slice(0, 5)}</p>
-                            <p>Type: {training.art}</p>
-                        </li>
+                        <tr key={training.id}>
+                            <td>{new Date(training.date).toLocaleDateString()}</td>
+                            <td>{new Date(training.date).toLocaleTimeString().slice(0, 5)}</td>
+                            <td>{training.art}</td>
+
+                            <td className="status-cell">
+
+                                <span className="status-btn" onClick={() => toggleStatusPopup(training.id)}>Open</span>
+
+                                <div className="status-popup">
+
+                                    <span className="status-btn" onClick={() => changeStatus(training.id, 'accepted')}>✔</span>
+                                    <span className="status-btn" onClick={() => changeStatus(training.id, 'rejected')}>✘</span>
+                                </div>
+                            </td>
+                        </tr>
                     ))}
-                </ul>
+                    </tbody>
+                </table>
             </div>
+
         </>
     );
 }

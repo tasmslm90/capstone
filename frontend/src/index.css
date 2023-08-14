@@ -119,4 +119,48 @@
     text-decoration: underline;
 }
 
+.training-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
+.training-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.training-table th,
+.training-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.status-cell {
+    position: relative;
+}
+
+.status-popup {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    top: 30px;
+    left: -5px;
+    border-radius: 5px;
+}
+
+.status-popup.active {
+    display: block;
+}
+
+.status-btn {
+    cursor: pointer;
+}
