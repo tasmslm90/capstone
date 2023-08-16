@@ -11,7 +11,6 @@ import java.util.List;
 public class TrainingService {
 
     private final TrainingRepository trainingRepository;
-    private final MongoUserRepository mongoUserRepository;
     private final UuidService uuidService;
 
     public List<Training> getAllTrainings() {

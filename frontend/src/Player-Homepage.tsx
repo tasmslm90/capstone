@@ -5,7 +5,7 @@ import {Training} from "./Training.tsx";
 
 export default function PlayerHomepage() {
     const [trainings, setTrainings] = useState<Training[]>([]);
-    const [status, setStatus] = useState<string>("");
+    const [status, setStatus] = useState<string| null>("");
     const fetchTrainings = async () => {
         try {
             const response = await axios.get("/api/training");
@@ -19,6 +19,31 @@ export default function PlayerHomepage() {
         fetchTrainings();
     }, []);
 
+    const toggleStatusPopup = (trainingId: string) => {
+        setStatus(status === trainingId ? null : trainingId);
+    };
+    const change = async (trainingId: string, newStatus: string) => {
+        try {
+            await axios.put(`/api/training/${trainingId}`, { status: newStatus });
+            setStatus(null);
+            fetchTrainings();
+        } catch (error) {
+            console.error("Fehler beim Aktualisieren des Status:", error);
+        }
+    };
+    function changeStatus(editedTraining: Training) {
+
+        axios.put("/api/training/" + editedTraining.id, editedTraining)
+            .then((response) =>
+                setTrainings((prevState) => prevState.map((training) => {
+                    if (training.id === editedTraining.id) {
+                        return response.data;
+                    } else {
+                        return training;
+                    }
+                }))
+            )
+    }
 
 
     return (
@@ -41,11 +66,20 @@ export default function PlayerHomepage() {
                             <td>{new Date(training.date).toLocaleTimeString().slice(0, 5)}</td>
                             <td>{training.art}</td>
                             <td className="status-cell">
-                                <span className="status-btn" onClick={() => setStatus(training.id)}>Open</span>
+                                    <span className="status-btn" onClick={() => toggleStatusPopup(training.id)}>
+                                        Open
+                                    </span>
                                 {status === training.id && (
                                     <div className="status-popup">
-                                        <span className="status-btn green" onClick={() => changeStatus(training.id, 'accepted')}>✔</span>
-                                        <span className="status-btn red" onClick={() => changeStatus(training.id, 'rejected')}>✘</span>
+                                        <button className="action-btn" onClick={() => changeStatus(training.id, 'accepted')}>
+                                            ✔
+                                        </button>
+                                        <button className="action-btn" onClick={() => changeStatus(training.id, 'rejected')}>
+                                            ✘
+                                        </button>
+                                        <button className="action-btn" onClick={() => setStatus(null)}>
+                                            Cancel
+                                        </button>
                                     </div>
                                 )}
                             </td>
@@ -54,7 +88,6 @@ export default function PlayerHomepage() {
                     </tbody>
                 </table>
             </div>
-
         </>
     );
 }

@@ -4,12 +4,13 @@ type Props = {
     onLogin: (username: string, password: string, role: string) => void
 }
 export default function LoginPage(props: Props) {
+
     const [username, setUsername] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     const [role, setRole] = useState<string>("")
 
-
     function onLogin(event: FormEvent) {
+
         event.preventDefault()
         props.onLogin(username, password, role)
 

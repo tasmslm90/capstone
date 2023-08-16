@@ -13,7 +13,6 @@ const LogoutButton: React.FC<LogoutButtonProps> = ({onLogoutSuccess}) => {
         try {
             await axios.post("/api/users/logout");
             await axios.get("/api/users/me");
-            console.log("Logout erfolgreich");
             onLogoutSuccess();
             navigate("/login");
 
@@ -23,9 +22,13 @@ const LogoutButton: React.FC<LogoutButtonProps> = ({onLogoutSuccess}) => {
     };
 
     return (
-        <button className="logout-button" onClick={handleLogout}>
-            Logout
-        </button>
+
+        <div className="logout-button-container">
+            <button className="logout-button" onClick={handleLogout}>
+                Logout
+            </button>
+        </div>
+
     );
 };
 

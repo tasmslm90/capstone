@@ -1,9 +1,9 @@
 .div20{
  text-align: center;
-    background-color:tan ;
+    background-color: #dddddd ;
 }
 .button{
-    background-color: #007bff ;
+    background-color: rosybrown;
     width: 40px;
     height: 40px;
     cursor: pointer;
@@ -12,14 +12,9 @@
     width: 100%;
 }
 
-.wetter{
-    background-color: red ;
-}
-
 .newtraining{
     text-align: center;
     background-color: lightyellow;
-
 }
 
  li {
@@ -53,8 +48,8 @@
 .training-container {
     background-color:antiquewhite;
     border: 1px solid black;
-    padding: 10px; /* Optional: Füge Abstand zum Inhalt hinzu */
-    margin-bottom: 10px; /* Optional: Füge Abstand zwischen den Trainings hinzu */
+    padding: 10px;
+    margin-bottom: 10px;
 }
 
 .space-div{
@@ -140,37 +135,39 @@
     padding: 8px;
     text-align: center;
 }
-
-
-.status-popup.active {
-    display: block;
-}
-
-.status-btn {
-    cursor: pointer;
-}
-.status-popup {
+.logout-button-container {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin-top: 5px;
+    justify-content: center;
+    align-items: flex-end;
+    position: fixed;
+    bottom: 20px;
+    width: 100%;
 }
 
+.logout-button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.logout-button:hover {
+    background-color: #2980b9;
+}
 .status-btn {
     cursor: pointer;
-    font-size: 20px;
-    margin: 0 5px;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 50%;
 }
 
-.green {
-    background-color: #4caf50;
-    color: white;
+.fc-header-toolbar {
+    background-color:-moz-mac-accentface;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
 }
 
-.red {
-    background-color: #f44336;
-    color: white;
-}
+

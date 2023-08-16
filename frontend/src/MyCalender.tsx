@@ -1,7 +1,6 @@
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import momentPlugin from "@fullcalendar/moment";
-//import deLocale from '@fullcalendar/core/locales/de'; deutsch
 import {ChangeEvent, useState} from "react";
 import axios from "axios";
 function MyCalendar({ fetchTrainings}: { fetchTrainings: () => void}) {
@@ -61,7 +60,6 @@ function MyCalendar({ fetchTrainings}: { fetchTrainings: () => void}) {
                 setClickedDates([]);
                 setSelectedArt('');
 
-
             })
             .catch((error) => {
                 console.error('Fehler beim Speichern des Trainings:', error);
@@ -94,7 +92,6 @@ const calendarOptions= {
     plugins:[dayGridPlugin, momentPlugin],
     initialView:"dayGridMonth",
     firstDay:1,
-    // locale={deLocale}
     dayCellContent:renderDayButton,
     aspectRatio:1.5,
     height:300,
