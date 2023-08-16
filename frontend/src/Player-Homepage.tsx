@@ -40,16 +40,14 @@ export default function PlayerHomepage() {
                             <td>{new Date(training.date).toLocaleDateString()}</td>
                             <td>{new Date(training.date).toLocaleTimeString().slice(0, 5)}</td>
                             <td>{training.art}</td>
-
                             <td className="status-cell">
-
-                                <span className="status-btn" onClick={() => toggleStatusPopup(training.id)}>Open</span>
-
-                                <div className="status-popup">
-
-                                    <span className="status-btn" onClick={() => changeStatus(training.id, 'accepted')}>✔</span>
-                                    <span className="status-btn" onClick={() => changeStatus(training.id, 'rejected')}>✘</span>
-                                </div>
+                                <span className="status-btn" onClick={() => setStatus(training.id)}>Open</span>
+                                {status === training.id && (
+                                    <div className="status-popup">
+                                        <span className="status-btn green" onClick={() => changeStatus(training.id, 'accepted')}>✔</span>
+                                        <span className="status-btn red" onClick={() => changeStatus(training.id, 'rejected')}>✘</span>
+                                    </div>
+                                )}
                             </td>
                         </tr>
                     ))}

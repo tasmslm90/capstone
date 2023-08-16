@@ -141,21 +141,6 @@
     text-align: center;
 }
 
-.status-cell {
-    position: relative;
-}
-
-.status-popup {
-    display: none;
-    position: absolute;
-    background-color: white;
-    border: 1px solid #ddd;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    padding: 10px;
-    top: 30px;
-    left: -5px;
-    border-radius: 5px;
-}
 
 .status-popup.active {
     display: block;
@@ -163,4 +148,29 @@
 
 .status-btn {
     cursor: pointer;
+}
+.status-popup {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.status-btn {
+    cursor: pointer;
+    font-size: 20px;
+    margin: 0 5px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+}
+
+.green {
+    background-color: #4caf50;
+    color: white;
+}
+
+.red {
+    background-color: #f44336;
+    color: white;
 }
