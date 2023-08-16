@@ -22,29 +22,6 @@ export default function PlayerHomepage() {
     const toggleStatusPopup = (trainingId: string) => {
         setStatus(status === trainingId ? null : trainingId);
     };
-    const change = async (trainingId: string, newStatus: string) => {
-        try {
-            await axios.put(`/api/training/${trainingId}`, { status: newStatus });
-            setStatus(null);
-            fetchTrainings();
-        } catch (error) {
-            console.error("Fehler beim Aktualisieren des Status:", error);
-        }
-    };
-    function changeStatus(editedTraining: Training) {
-
-        axios.put("/api/training/" + editedTraining.id, editedTraining)
-            .then((response) =>
-                setTrainings((prevState) => prevState.map((training) => {
-                    if (training.id === editedTraining.id) {
-                        return response.data;
-                    } else {
-                        return training;
-                    }
-                }))
-            )
-    }
-
 
     return (
         <>
@@ -71,12 +48,8 @@ export default function PlayerHomepage() {
                                     </span>
                                 {status === training.id && (
                                     <div className="status-popup">
-                                        <button className="action-btn" onClick={() => changeStatus(training.id, 'accepted')}>
-                                            ✔
-                                        </button>
-                                        <button className="action-btn" onClick={() => changeStatus(training.id, 'rejected')}>
-                                            ✘
-                                        </button>
+                                        <button className="action-btn">✔</button>
+                                        <button className="action-btn">✘</button>
                                         <button className="action-btn" onClick={() => setStatus(null)}>
                                             Cancel
                                         </button>
