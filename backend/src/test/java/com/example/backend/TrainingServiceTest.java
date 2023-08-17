@@ -1,26 +1,21 @@
 package com.example.backend;
 
-import com.example.backend.security.MongoUserController;
-import com.example.backend.security.MongoUserService;
-import com.example.backend.security.UserData;
-import org.junit.jupiter.api.Assertions;
+import com.example.backend.security.*;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-
+import org.junit.jupiter.api.Assertions;
 import static org.mockito.Mockito.*;
 
 class TrainingServiceTest {
     TrainingRepository trainingRepository = mock(TrainingRepository.class);
     UuidService uuidService = mock(UuidService.class);
     TrainingService trainingService = new TrainingService(trainingRepository, uuidService);
-
-   MongoUserService mongoUserService;
-
- MongoUserController mongoUserController;
 
     @Test
     void test_getAllTraining() {

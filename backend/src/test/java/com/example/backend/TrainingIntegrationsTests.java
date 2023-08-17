@@ -116,7 +116,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
     @Test
-    @WithMockUser(username = "testUser", roles = {"PLAYER"})
+    @WithMockUser
     void testGetUserInfo() throws Exception {
         UserData userData = new UserData("testUser", "PLAYER");
         when(mongoUserService.getUserData()).thenReturn(userData);
