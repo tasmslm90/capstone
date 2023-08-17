@@ -10,7 +10,6 @@ export default function PlayerHomepage() {
         try {
             const response = await axios.get("/api/training");
             setTrainings(response.data);
-            console.log(response.data)
         } catch (error) {
             console.error("Fehler beim Abrufen der Trainings:", error);
         }

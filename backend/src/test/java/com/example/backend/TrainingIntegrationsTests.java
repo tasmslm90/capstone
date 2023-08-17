@@ -1,5 +1,6 @@
 package com.example.backend;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -20,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class TrainingIntegrationsTests {
+ class TrainingIntegrationsTests {
 
     @Autowired
     private MockMvc mockMvc;
@@ -81,4 +82,26 @@ public class TrainingIntegrationsTests {
                         .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isOk());
     }
+    @Test
+    @DirtiesContext
+    @WithMockUser
+    void testUpdateTraining() throws Exception {
+
+        Training newTraining = new Training("1", "02.02.2222","Handball");
+        trainingRepository.save(newTraining);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        mockMvc.perform(
+                        MockMvcRequestBuilders.put("/api/training/{id}", "1")
+                                .with(csrf())
+                                .content(objectMapper.writeValueAsBytes(new Training("1", "02.02.2222","Tennis")))
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json("""
+                    {"id": "1","date":"02.02.2222","art": "Tennis" }
+                    """));
+    }
 }
+

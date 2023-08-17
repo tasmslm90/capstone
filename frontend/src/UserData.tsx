@@ -1,6 +1,4 @@
-
-
 export type UserData = {
-    name:string,
-    role:string
+    name: string,
+    role: string
 }

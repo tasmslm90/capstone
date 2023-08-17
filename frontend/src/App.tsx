@@ -14,9 +14,7 @@ import {UserData} from "./UserData.tsx";
 function App() {
     const [trainings, setTrainings] = useState<Training[]>([]);
     const [user, setUser] = useState<UserData>()
-
     const navigate = useNavigate()
-
     const fetchTrainings = async () => {
         try {
             const response = await axios.get("/api/training");
@@ -82,7 +80,6 @@ function App() {
                 <Route path="/login" element={<LoginPage onLogin={login}></LoginPage>}/>
             </Routes>
             {!isLoginPage() && <LogoutButton onLogoutSuccess={() => setUser(undefined)}/>}
-
 
         </>
     )

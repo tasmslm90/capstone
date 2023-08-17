@@ -28,10 +28,10 @@ function MyCalendar({ fetchTrainings}: { fetchTrainings: () => void}) {
         const hoursandmin = event.target.value.split(":");
         const hours = Number(hoursandmin[0]);
         const min = Number(hoursandmin[1]);
-        const date = clickedDates[clickedDates.length-1]
-        date.setHours(hours,min);
-        setClickedDates((prevDates) =>{
-            prevDates[prevDates.length-1]=date;
+        const date = clickedDates[clickedDates.length - 1]
+        date.setHours(hours, min);
+        setClickedDates((prevDates) => {
+            prevDates[prevDates.length - 1] = date;
             return prevDates
         })
     };
@@ -48,7 +48,7 @@ function MyCalendar({ fetchTrainings}: { fetchTrainings: () => void}) {
     };
     const handleAddTraining = () => {
         const newTraining = {
-            date: clickedDates[clickedDates.length-1],
+            date: clickedDates[clickedDates.length - 1],
             art: selectedArt,
         };
 
@@ -88,16 +88,16 @@ function MyCalendar({ fetchTrainings}: { fetchTrainings: () => void}) {
             </label>
         );
     };
-const calendarOptions= {
-    plugins:[dayGridPlugin, momentPlugin],
-    initialView:"dayGridMonth",
-    firstDay:1,
-    dayCellContent:renderDayButton,
-    aspectRatio:1.5,
-    height:300,
-    dateClick:handleDayClick
+    const calendarOptions = {
+        plugins: [dayGridPlugin, momentPlugin],
+        initialView: "dayGridMonth",
+        firstDay: 1,
+        dayCellContent: renderDayButton,
+        aspectRatio: 1.5,
+        height: 300,
+        dateClick: handleDayClick
 
-}
+    }
     return (
         <>
             <div className={"container"}>
@@ -116,7 +116,7 @@ const calendarOptions= {
 
                     </ul>
                     <div className={"art-options"}>
-                        {availableArtOptions.map((art) =>  renderArtCheckbox(art))}
+                        {availableArtOptions.map((art) => renderArtCheckbox(art))}
                     </div>
 
                     <label className={"time-label"}>
@@ -135,8 +135,8 @@ const calendarOptions= {
                         </div>
                     )}
                     <div className={"space-div"}></div>
-                        <button className={"addbutton"} onClick={handleAddTraining}>Add Training</button>
-                        <button className={"cancelbutton"} onClick={handleCancel}>Cancel</button>
+                    <button className={"addbutton"} onClick={handleAddTraining}>Add Training</button>
+                    <button className={"cancelbutton"} onClick={handleCancel}>Cancel</button>
                 </div>
             )}
         </>

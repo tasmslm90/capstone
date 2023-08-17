@@ -24,7 +24,6 @@ public class MongoUserService {
         }
 
         assert user.isPresent();
-        UserData userData = new UserData(user.get().username(),user.get().role());
-        return userData;
+        return new UserData(user.get().username(),user.get().role());
     }
 }

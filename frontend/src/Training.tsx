@@ -1,5 +1,5 @@
 export  type Training = {
-    id:string,
-    date:string,
-    art:string
+    id: string,
+    date: string,
+    art: string
 }
