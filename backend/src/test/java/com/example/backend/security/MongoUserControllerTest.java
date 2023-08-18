@@ -10,20 +10,17 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 public class MongoUserControllerTest {
 
     @Mock
     private MongoUserService mongoUserService;
-
-    @Mock
-    private MongoUserRepository mongoUserRepository;
 
     @Mock
     private SecurityContext securityContext;
@@ -69,4 +66,24 @@ public class MongoUserControllerTest {
                 .andExpect(jsonPath("$.role").doesNotExist());
 
     }
+
+    @Test
+    @WithMockUser
+    void testLoginEndpoint() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/users/login")
+                        .with(csrf())
+                        .content("username=hans&password=hans1"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @WithMockUser
+    void testLogoutEndpoint() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/users/login")
+                .with(csrf())
+                .content("username=hans&password=hans1"));
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/users/logout").with(csrf()))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
 }
