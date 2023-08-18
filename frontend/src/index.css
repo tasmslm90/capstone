@@ -1,69 +1,173 @@
+.div20{
+ text-align: center;
+    background-color: #dddddd ;
+}
+.button{
+    background-color: rosybrown;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+    width: 100%;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+.newtraining{
+    text-align: center;
+    background-color: lightyellow;
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+ li {
+     list-style-type: none;
+    font-family: Arial, sans-serif;
+     font-size: 16px;
+     text-align: center;
+ }
+.time-label {
+    font-size: 18px;
+    font-weight: bold;
+
+}
+.select-time {
+    height: 22px;
+    font-size: 17px;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.time{
+    font-size: 100px;
+    color: red;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+.addbutton{
+    font-size: 18px;
 }
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+.cancelbutton{
+    font-size: 18px;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.training-container {
+    background-color:antiquewhite;
+    border: 1px solid black;
+    padding: 10px;
+    margin-bottom: 10px;
 }
+
+.space-div{
+    margin-bottom: 16px;
+}
+
+.list1{
+    text-align: center;
+    color:red;
+    font-size: 18px;
+}
+.login {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.login form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login p {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.login input,
+.login select {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.login button {
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login button:hover {
+    background-color: #0056b3;
+}
+
+.login a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.login a:hover {
+    text-decoration: underline;
+}
+
+.training-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.training-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.training-table th,
+.training-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+.logout-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    position: fixed;
+    bottom: 20px;
+    width: 100%;
+}
+
+.logout-button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.logout-button:hover {
+    background-color: #2980b9;
+}
+.status-btn {
+    cursor: pointer;
+}
+
+.fc-header-toolbar {
+    background-color:#007bff;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+
