@@ -17,7 +17,7 @@ import static org.mockito.Mockito.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-public class MongoUserControllerTest {
+ class MongoUserControllerTest {
 
     @Mock
     private MongoUserService mongoUserService;
@@ -37,7 +37,7 @@ public class MongoUserControllerTest {
 
     @Test
     @WithMockUser
-    public void testGetUserInfoWithExistingUser() throws Exception {
+     void testGetUserInfoWithExistingUser() throws Exception {
         String username = "testUser";
         String role = "userRole";
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -54,7 +54,7 @@ public class MongoUserControllerTest {
 
     @Test
     @WithMockUser
-    public void testGetUserInfoWithNonExistingUser() throws Exception {
+     void testGetUserInfoWithNonExistingUser() throws Exception {
 
         UserData userData = new UserData("anonymousUser", null);
         when(mongoUserService.getUserData()).thenReturn(userData);
