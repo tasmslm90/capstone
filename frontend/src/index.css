@@ -3,7 +3,7 @@
     background-color: #dddddd ;
 }
 .button{
-    background-color: rosybrown;
+    background-color:navajowhite;
     width: 40px;
     height: 40px;
     cursor: pointer;
@@ -115,11 +115,11 @@
 }
 
 .training-container {
-    max-width: 600px;
+    max-width: 300px;
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #ddd;
-    border-radius: 10px;
+    border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -163,11 +163,30 @@
 }
 
 .fc-header-toolbar {
-    background-color:#007bff;
+    background-color:#2980b9;
     color: #fff;
     padding: 10px;
     border-radius: 5px;
     margin-bottom: 20px;
 }
 
+.player-homepage-button{
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 20px;
+    background-color: #3498db;
+    color: white;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
 
+}
+.training-container {
+    max-height: 400px;
+    overflow-y: auto;
+}

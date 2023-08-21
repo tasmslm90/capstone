@@ -4,6 +4,7 @@ import {useNavigate} from "react-router-dom";
 import {UserData} from "./UserData.tsx";
 import TrainingCard from "./TrainingCard.tsx";
 
+
 type Props = {
 
     editedTraining: (editedTraining: Training) => void
@@ -31,7 +32,7 @@ function HomePage(props: Props) {
             </div>
             <div className="button-group">
                 <button className="player-homepage-button" onClick={handleGoToPlayerHomepage}>
-                    Go to Player Homepage
+                    Home
                 </button>
             </div>
         </>

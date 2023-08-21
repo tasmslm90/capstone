@@ -94,7 +94,7 @@ function MyCalendar({ fetchTrainings}: { fetchTrainings: () => void}) {
         firstDay: 1,
         dayCellContent: renderDayButton,
         aspectRatio: 1.5,
-        height: 300,
+        height: 340,
         dateClick: handleDayClick
 
     }
