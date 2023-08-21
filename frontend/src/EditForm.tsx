@@ -13,6 +13,7 @@ export default function EditForm(props: Props) {
     const [date, setDate] = useState<string>("")
     const [type, setType] = useState<string>("")
 
+
     useEffect(() => {
 
         setDate(props.training.date)
@@ -22,17 +23,14 @@ export default function EditForm(props: Props) {
 
     function editTraining(event: FormEvent) {
         event.preventDefault()
-        props.editedTraining({id: props.training.id, date: date, art: type});
+        props.editedTraining({id: props.training.id, date: date, art: type, status:status});
 
     }
-
     return (
         <form onSubmit={editTraining}>
-
             <input value={date} onChange={(event) => setDate(event.target.value)}/>
             <input value={type} onChange={(event) => setType(event.target.value)}/>
-            <button>Save</button>
-
+            <button type="submit">Save</button>
         </form>
     );
 }

@@ -42,3 +42,35 @@ public class TrainingService {
 }
 
 
+/*
+<tr key={props.training.id}>
+<td>{new Date(props.training.date).toLocaleDateString()}</td>
+<td>{new Date(props.training.date).toLocaleTimeString().slice(0, 5)}</td>
+<td>{props.training.art}</td>
+<td>{props.user?.name}</td>
+<td>{props.training.status}</td>
+<td> <button className="edit-button" onClick={() => setIsEdit(!isEdit)}>🖊️
+</button></td>
+<td> <button className="delete-button" onClick={() => handleDeleteTraining(props.training.id)}>🗑️
+</button></td>
+
+</tr>
+
+--------------------------
+ <>
+            <MyCalendar fetchTrainings={props.fetchTrainings}></MyCalendar>
+
+                {props.trainings.map((training) => (
+                    <TrainingCard training={training} onDeleteTraining={props.fetchTrainings}
+                                  user={props.user} editedTraining={props.editedTraining}/>
+                ))}
+
+            <div className="button-group">
+                <button className="player-homepage-button" onClick={handleGoToPlayerHomepage}>
+                    Home
+                </button>
+            </div>
+        </>
+
+
+*/

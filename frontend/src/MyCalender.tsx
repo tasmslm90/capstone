@@ -7,8 +7,9 @@ function MyCalendar({ fetchTrainings}: { fetchTrainings: () => void}) {
     const [clickedDates, setClickedDates] = useState<Date[]>([]);
     const [dateSelectionDisabled, setDateSelectionDisabled] = useState(false);
     const [selectedArt, setSelectedArt] = useState("");
-    const [selectedStatus, setSelectedStatus] = useState("OPEN");
+    const [selectedStatus, setSelectedStatus] = useState("");
     const availableArtOptions = ["Fußball", "Basketball", "Handball", "Tennis"];
+    const availableStatusOptions = ["OPEN"];
 
 
     const handleDayClick = (dateClickInfo: any) => {
@@ -77,7 +78,24 @@ function MyCalendar({ fetchTrainings}: { fetchTrainings: () => void}) {
         const value = event.target.value;
         setSelectedArt(value)
     };
+    const handleStatusChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const value = event.target.value;
+        setSelectedStatus(value)
+    };
 
+    const renderStatusCheckbox = (status: string) => {
+        return (
+            <label key={status} className={"art-checkbox"}>
+                <input
+                    type="checkbox"
+                    value={status}
+                    checked={selectedArt.includes(status)}
+                    onChange={handleStatusChange}
+                />
+                {status}
+            </label>
+        );
+    };
     const renderArtCheckbox = (art: string) => {
         return (
             <label key={art} className={"art-checkbox"}>
@@ -121,6 +139,9 @@ function MyCalendar({ fetchTrainings}: { fetchTrainings: () => void}) {
                     <div className={"art-options"}>
                         {availableArtOptions.map((art) => renderArtCheckbox(art))}
                     </div>
+                    <div className={"status-options"}>
+                        {availableStatusOptions.map((status) => renderStatusCheckbox(status))}
+                    </div>
 
                     <label className={"time-label"}>
                         <strong> Time : </strong>
@@ -135,6 +156,11 @@ function MyCalendar({ fetchTrainings}: { fetchTrainings: () => void}) {
                     {selectedArt && (
                         <div className={"selected-art"}>
                             <strong>Selected Art: </strong> {selectedArt}
+                        </div>
+                    )}
+                    {selectedStatus && (
+                        <div className={"selected-status"}>
+                            <strong>Status: </strong> {selectedStatus}
                         </div>
                     )}
                     <div className={"space-div"}></div>

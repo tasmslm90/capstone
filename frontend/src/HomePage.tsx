@@ -5,6 +5,7 @@ import {UserData} from "./UserData.tsx";
 import TrainingCard from "./TrainingCard.tsx";
 
 
+
 type Props = {
 
     editedTraining: (editedTraining: Training) => void
@@ -23,13 +24,11 @@ function HomePage(props: Props) {
     return (
         <>
             <MyCalendar fetchTrainings={props.fetchTrainings}></MyCalendar>
-            <div className={"div20"}>
-                <h3>Training Days</h3>
+
                 {props.trainings.map((training) => (
                     <TrainingCard training={training} onDeleteTraining={props.fetchTrainings}
                                   user={props.user} editedTraining={props.editedTraining}/>
                 ))}
-            </div>
             <div className="button-group">
                 <button className="player-homepage-button" onClick={handleGoToPlayerHomepage}>
                     Home

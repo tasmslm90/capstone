@@ -10,6 +10,7 @@ type Props = {
     onDeleteTraining: () => Promise<void>
     user?: UserData
 }
+
 export default function TrainingCard(props: Props) {
 
 
@@ -27,37 +28,43 @@ export default function TrainingCard(props: Props) {
             });
     };
     return (
-        <div key={props.training.id} className="training-item">
-            {!isEdit ? <div className="training-container">
-                <div className="training-info">
-                    <label>Datum : </label>
-                    <span>{new Date(props.training.date).toLocaleDateString()}</span>
-                </div>
-                <div className="training-info">
-                    <label>Uhrzeit : </label>
-                    <span>{new Date(props.training.date).toLocaleTimeString().slice(0, 5)}</span>
-                </div>
-                <div className="training-info">
-                    <label>Art : </label>
-                    <span>{props.training.art}</span>
-                </div>
-                <div className="training-info">
-                    <label>Status : </label>
-                    <span>{props.training.status}</span>
-                </div>
-                <div className="trainer-info">
-                    <label>Trainer : </label>
-                    <span>{props.user?.name}</span>
-                </div>
 
-            </div> : <EditForm training={props.training} editedTraining={props.editedTraining}/>}
-
-            <div className="button-group">
-                <button className="edit-button" onClick={() => setIsEdit(!isEdit)}>🖊️
-                </button>
-                <button className="delete-button" onClick={() => handleDeleteTraining(props.training.id)}>🗑️
-                </button>
-            </div>
-        </div>
+        <>
+                {!isEdit && (
+                    <table className="training-table">
+                        <thead>
+                        <>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Type</th>
+                            <th>Trainer</th>
+                            <th>Status</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </>
+                        </thead>
+                        <tbody>
+                        <tr key={props.training.id}>
+                            <td>{new Date(props.training.date).toLocaleDateString()}</td>
+                            <td>{new Date(props.training.date).toLocaleTimeString().slice(0, 5)}</td>
+                            <td>{props.training.art}</td>
+                            <td>{props.user?.name}</td>
+                            <td>{props.training.status}</td>
+                            <td>
+                                <button className="edit-button" onClick={() => setIsEdit(!isEdit)}>
+                                    🖊️
+                                </button>
+                            </td>
+                            <td>
+                                <button className="delete-button" onClick={() => handleDeleteTraining(props.training.id)}>
+                                    🗑️
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                )}
+            {isEdit && <EditForm training={props.training} editedTraining={props.editedTraining} />}
+        </>
     );
 }
