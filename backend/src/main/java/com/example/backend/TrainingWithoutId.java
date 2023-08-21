@@ -11,4 +11,5 @@ public class TrainingWithoutId {
 
     private String date;
     private String art;
+    private String Status;
 }

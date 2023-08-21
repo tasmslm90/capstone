@@ -25,6 +25,8 @@ public class TrainingController {
         TrainingWithoutId training = new TrainingWithoutId();
         training.setDate(trainingWithoutId.getDate());
         training.setArt(trainingWithoutId.getArt());
+        training.setStatus(trainingWithoutId.getStatus());
+
         Training savedTraining = trainingService.addTraining(training);
         return savedTraining;
     }

@@ -41,6 +41,10 @@ export default function TrainingCard(props: Props) {
                     <label>Art : </label>
                     <span>{props.training.art}</span>
                 </div>
+                <div className="training-info">
+                    <label>Status : </label>
+                    <span>{props.training.status}</span>
+                </div>
                 <div className="trainer-info">
                     <label>Trainer : </label>
                     <span>{props.user?.name}</span>

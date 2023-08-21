@@ -7,6 +7,7 @@ function MyCalendar({ fetchTrainings}: { fetchTrainings: () => void}) {
     const [clickedDates, setClickedDates] = useState<Date[]>([]);
     const [dateSelectionDisabled, setDateSelectionDisabled] = useState(false);
     const [selectedArt, setSelectedArt] = useState("");
+    const [selectedStatus, setSelectedStatus] = useState("OPEN");
     const availableArtOptions = ["Fußball", "Basketball", "Handball", "Tennis"];
 
 
@@ -50,6 +51,7 @@ function MyCalendar({ fetchTrainings}: { fetchTrainings: () => void}) {
         const newTraining = {
             date: clickedDates[clickedDates.length - 1],
             art: selectedArt,
+            status:selectedStatus
         };
 
         axios.post('/api/training', newTraining)
@@ -59,6 +61,7 @@ function MyCalendar({ fetchTrainings}: { fetchTrainings: () => void}) {
                 setDateSelectionDisabled(false);
                 setClickedDates([]);
                 setSelectedArt('');
+                setSelectedStatus("")
 
             })
             .catch((error) => {

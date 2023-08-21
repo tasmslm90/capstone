@@ -24,6 +24,7 @@ public class TrainingService {
         training.setId(id);
         training.setDate(trainingWithoutId.getDate());
         training.setArt(trainingWithoutId.getArt());
+        training.setStatus(trainingWithoutId.getStatus());
         trainingRepository.save(training);
         return training;
     }
@@ -31,6 +32,7 @@ public class TrainingService {
         Training updatedTraining = trainingRepository.findById(training.getId()).orElseThrow(() -> new Exception("training nihct vorhanden"));
         updatedTraining.setDate(training.getDate());
         updatedTraining.setArt(training.getArt());
+        updatedTraining.setStatus(training.getStatus());
         return trainingRepository.save(updatedTraining);
     }
 
