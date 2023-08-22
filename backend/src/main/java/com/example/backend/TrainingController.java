@@ -31,20 +31,22 @@ public class TrainingController {
         return savedTraining;
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Training> updateTraining(@PathVariable String id, @RequestBody Training updatedTraining) {
-        try {
-            Training newTraining = new Training(id, updatedTraining.getDate(), updatedTraining.getArt(), updatedTraining.getStatus());
-            Training training = trainingService.updateTraining(newTraining);
-            if (training != null) {
-                return ResponseEntity.ok(training);
-            } else {
-                return ResponseEntity.notFound().build();
-            }
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+    @PutMapping("{id}")
+    public Training updateTraining(@PathVariable String id, @RequestBody Training updatedTraining) {
+        return trainingService.updateTraining(updatedTraining);
     }
+
+//    @PutMapping("/{id}")
+//    public ResponseEntity<Training> updateTraining(@PathVariable String id, @RequestBody Training updatedTraining) {
+//        try {
+//            Training training = trainingService.updateTraining(updatedTraining);
+//           {
+//                return ResponseEntity.notFound().build();
+//            }
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+//        }
+//    }
 
     @DeleteMapping("/{id}")
     public void deleteTraining(@PathVariable String id) {
