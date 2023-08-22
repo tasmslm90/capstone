@@ -32,21 +32,10 @@ public class TrainingController {
     }
 
     @PutMapping("{id}")
-    public Training updateTraining(@PathVariable String id, @RequestBody Training updatedTraining) {
-        return trainingService.updateTraining(updatedTraining);
+    public Training updateTraining(@PathVariable String id, @RequestBody Training edittraining) {
+        return trainingService.updateTraining(edittraining);
     }
 
-//    @PutMapping("/{id}")
-//    public ResponseEntity<Training> updateTraining(@PathVariable String id, @RequestBody Training updatedTraining) {
-//        try {
-//            Training training = trainingService.updateTraining(updatedTraining);
-//           {
-//                return ResponseEntity.notFound().build();
-//            }
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-//        }
-//    }
 
     @DeleteMapping("/{id}")
     public void deleteTraining(@PathVariable String id) {
