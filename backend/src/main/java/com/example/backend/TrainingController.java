@@ -32,7 +32,8 @@ public class TrainingController {
     }
 
     @PutMapping("{id}")
-    public Training updateTraining(@PathVariable String id, @RequestBody Training edittraining) {
+    public Training updateTraining(@PathVariable String id, @RequestBody Training updatedtraining) {
+        Training edittraining = new Training(updatedtraining.getId(), updatedtraining.getDate(), updatedtraining.getArt(), updatedtraining.getStatus());
         return trainingService.updateTraining(edittraining);
     }
 
