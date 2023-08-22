@@ -26,9 +26,10 @@ export default function EditForm(props: Props) {
 
     function editTraining(event: FormEvent) {
         event.preventDefault()
-        props.onSaveEdit({id: props.training.id, date: date, art: type, status:status});
+        props.onSaveEdit({id: props.training.id, date: date, art: type, status: status});
 
     }
+
     return (
         <form onSubmit={editTraining}>
             <input value={date} onChange={(event) => setDate(event.target.value)}/>

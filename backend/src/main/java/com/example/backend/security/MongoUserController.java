@@ -13,13 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class MongoUserController {
 
     private final MongoUserService mongoUserService;
-    public MongoUserController(MongoUserService mongoUserService){
+
+    public MongoUserController(MongoUserService mongoUserService) {
         this.mongoUserService = mongoUserService;
     }
+
     @GetMapping("me")
     public UserData getUserInfo() {
 
-     return this.mongoUserService.getUserData();
+        return this.mongoUserService.getUserData();
 
     }
 

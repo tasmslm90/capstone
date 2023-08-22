@@ -37,8 +37,8 @@ export default function TrainingCard(props: Props) {
             });
     };
     return (
-<>
-        <div className={"card"}>
+        <>
+            <div className={"card"}>
                 {!isEdit && (
                     <table className="training-table">
 
@@ -55,7 +55,8 @@ export default function TrainingCard(props: Props) {
                                 </button>
                             </td>
                             <td>
-                                <button className="delete-button" onClick={() => handleDeleteTraining(props.training.id)}>
+                                <button className="delete-button"
+                                        onClick={() => handleDeleteTraining(props.training.id)}>
                                     🗑️
                                 </button>
                             </td>
@@ -63,9 +64,9 @@ export default function TrainingCard(props: Props) {
                         </tbody>
                     </table>
                 )}
-            {isEdit && <EditForm training={props.training}  onSaveEdit={handleSaveEdit}
-                                 onCancelEdit={handleCancelEdit} />}
-        </div>
-</>
+                {isEdit && <EditForm training={props.training} onSaveEdit={handleSaveEdit}
+                                     onCancelEdit={handleCancelEdit}/>}
+            </div>
+        </>
     );
 }

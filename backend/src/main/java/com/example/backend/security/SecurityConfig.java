@@ -19,7 +19,7 @@ import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http)throws Exception{
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         CsrfTokenRequestAttributeHandler requestHandler = new CsrfTokenRequestAttributeHandler();
         requestHandler.setCsrfRequestAttributeName(null);
 
@@ -31,25 +31,26 @@ public class SecurityConfig {
                         httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
                 .authorizeHttpRequests(httpRequests ->
                         httpRequests
-                                .requestMatchers(HttpMethod.GET,"/api/training").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/training").permitAll()
                                 .requestMatchers("/api/training").authenticated()
 
-                                .requestMatchers(HttpMethod.GET,"/api/training/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/training/**").permitAll()
                                 .requestMatchers("/api/training/**").authenticated()
                                 .requestMatchers("api/users/me").permitAll()
                                 .anyRequest().permitAll()
                 )
 
                 .logout(logout -> logout.logoutUrl("/api/users/logout")
-                .deleteCookies("JSESSIONID")
-                .logoutSuccessHandler((request, response, authentication) ->
-                        response.setStatus(HttpServletResponse.SC_OK)
-                ))
+                        .deleteCookies("JSESSIONID")
+                        .logoutSuccessHandler((request, response, authentication) ->
+                                response.setStatus(HttpServletResponse.SC_OK)
+                        ))
                 .build();
 
     }
+
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return Argon2PasswordEncoder.defaultsForSpringSecurity_v5_8();
     }
 }

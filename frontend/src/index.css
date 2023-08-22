@@ -1,7 +1,7 @@
 .ubersrift {
-    text-align: center; /* Zentriert den Text horizontal */
-    background-size: cover; /* Bildgröße anpassen */
-    color: black; /* Textfarbe auf weiß setzen, um besser sichtbar zu sein */
+    text-align: center;
+    background-size: cover;
+    color: black;
     padding: 5px;
 }
 

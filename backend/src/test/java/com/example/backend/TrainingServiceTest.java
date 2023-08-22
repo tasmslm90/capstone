@@ -1,15 +1,14 @@
 package com.example.backend;
 
-import com.example.backend.security.*;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+
 import org.junit.jupiter.api.Assertions;
+
 import static org.mockito.Mockito.*;
 
 class TrainingServiceTest {
@@ -20,13 +19,13 @@ class TrainingServiceTest {
     @Test
     void test_getAllTraining() {
         when(trainingRepository.findAll()).thenReturn(Arrays.asList(
-                new Training("1", "02.08.20023", "Taktik"),
-                new Training("2", "04.08.20023", "Kondition")
+                new Training("1", "02.08.20023", "Taktik", "OPEN"),
+                new Training("2", "04.08.20023", "Kondition", "OPEN")
         ));
         List<Training> actual = trainingService.getAllTrainings();
         List<Training> expected = Arrays.asList(
-                new Training("1", "02.08.20023", "Taktik"),
-                new Training("2", "04.08.20023", "Kondition")
+                new Training("1", "02.08.20023", "Taktik", "OPEN"),
+                new Training("2", "04.08.20023", "Kondition", "OPEN")
         );
         Assertions.assertEquals(expected, actual);
     }
@@ -44,8 +43,8 @@ class TrainingServiceTest {
 
     @Test
     void test_addTraining() {
-        TrainingWithoutId trainingWithoutId = new TrainingWithoutId("02.08.1023", "Taktik");
-        Training expected = new Training("1111", trainingWithoutId.getDate(), trainingWithoutId.getArt());
+        TrainingWithoutId trainingWithoutId = new TrainingWithoutId("02.08.1023", "Taktik", "OPEN");
+        Training expected = new Training("1111", trainingWithoutId.getDate(), trainingWithoutId.getArt(), trainingWithoutId.getStatus());
         when(uuidService.generateUUID()).thenReturn("1111");
         when(trainingRepository.save(expected)).thenReturn(expected);
         Training actual = trainingService.addTraining(trainingWithoutId);
@@ -61,15 +60,14 @@ class TrainingServiceTest {
     @Test
     void testUpdateTraining() {
         try {
-            Training newTraining = new Training("12", "02.02.2222", "Handball");
+            Training newTraining = new Training("12", "02.02.2222", "Handball", "In_Planung");
             when(trainingRepository.findById("12")).thenReturn(Optional.of(newTraining));
             Training actual = trainingService.updateTraining(newTraining);
-            Training expected = new Training("12", "02.02.2222", "Tennis");
+            Training expected = new Training("12", "02.02.2222", "Tennis", "OPEN");
             Assertions.assertNotEquals(expected, actual);
         } catch (Exception e) {
             System.out.println(e.getMessage());
+
         }
-
     }
-
 }

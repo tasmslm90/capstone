@@ -4,13 +4,14 @@ import momentPlugin from "@fullcalendar/moment";
 import {ChangeEvent, useState} from "react";
 import axios from "axios";
 import TableHeader from "./TableHaeder.tsx";
-function MyCalendar({ fetchTrainings}: { fetchTrainings: () => void}) {
+
+function MyCalendar({fetchTrainings}: { fetchTrainings: () => void }) {
     const [clickedDates, setClickedDates] = useState<Date[]>([]);
     const [dateSelectionDisabled, setDateSelectionDisabled] = useState(false);
     const [selectedArt, setSelectedArt] = useState("");
     const [selectedStatus, setSelectedStatus] = useState("");
     const availableArtOptions = ["Football", "Basketball", "Handball", "Tennis"];
-    const availableStatusOptions = ["OPEN","In_Planning"];
+    const availableStatusOptions = ["OPEN", "In_Planning"];
 
 
     const handleDayClick = (dateClickInfo: any) => {
@@ -23,9 +24,9 @@ function MyCalendar({ fetchTrainings}: { fetchTrainings: () => void}) {
     const renderDayButton = (info: { dayNumberText: string, date: Date }) => {
         return (
             <div className="calendar-day-cell">
-            <button className={"button"} onClick={() => handleDayClick(info)}>
-                {info.dayNumberText}
-            </button>
+                <button className={"button"} onClick={() => handleDayClick(info)}>
+                    {info.dayNumberText}
+                </button>
             </div>
         );
     };
@@ -55,7 +56,7 @@ function MyCalendar({ fetchTrainings}: { fetchTrainings: () => void}) {
         const newTraining = {
             date: clickedDates[clickedDates.length - 1],
             art: selectedArt,
-            status:selectedStatus
+            status: selectedStatus
         };
 
         axios.post('/api/training', newTraining)
@@ -124,14 +125,15 @@ function MyCalendar({ fetchTrainings}: { fetchTrainings: () => void}) {
     }
     return (
         <>
-                <h2 className={"ubersrift"}>Trainingsplaner</h2>
-                {<FullCalendar {...calendarOptions}
-                />}
+            <h2 className={"ubersrift"}>Trainingsplaner</h2>
+            {<FullCalendar {...calendarOptions}
+            />}
             {clickedDates.length > 0 && (
                 <div className={"newtraining"}>
                     <ul>
                         {clickedDates.map((date, index) => (
-                            <li className={"list1"} key={index}>Add new training for the date {new Date(date).toLocaleDateString()}</li>
+                            <li className={"list1"} key={index}>Add new training for the
+                                date {new Date(date).toLocaleDateString()}</li>
                         ))}
                     </ul>
                     <div className={"art-options"}>

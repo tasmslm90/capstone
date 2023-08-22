@@ -15,8 +15,6 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -27,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
- class TrainingIntegrationsTests {
+class TrainingIntegrationsTests {
 
     @Autowired
     private MockMvc mockMvc;
@@ -47,7 +45,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
     @WithMockUser
     void test_getTraining() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/api/training")
-                .with(csrf()))
+                        .with(csrf()))
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
                         []
@@ -59,29 +57,32 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
     @WithMockUser
     void test_addTraining() throws Exception {
         String requestBody = """
-                {"date":"22.08.2023","art":"Taktik"}
+                {"date":"22.08.2023","art":"Taktik","status":"OPEN"}
                 """;
         ResultActions resultActions = mockMvc.perform(post("/api/training")
                 .with(csrf())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(requestBody)
-                );
+        );
 
         resultActions.andExpect(status().isOk());
         resultActions.andExpect(jsonPath("$.date").value("22.08.2023"));
         resultActions.andExpect(jsonPath("$.art").value("Taktik"));
+        resultActions.andExpect(jsonPath("$.status").value("OPEN"));
     }
+
     @Test
     @DirtiesContext
     @WithMockUser
     void test_deleteTraining() throws Exception {
-       Training newTraining = new Training("1","01.01.2023", "Handball");
+        Training newTraining = new Training("1", "01.01.2023", "Handball", "OPEN");
         trainingRepository.save(newTraining);
         mockMvc.perform(MockMvcRequestBuilders.delete("/api/training/1")
-                .with(csrf()))
+                        .with(csrf()))
                 .andExpect(status().isOk());
 
     }
+
     @Test
     @DirtiesContext
     @WithMockUser
@@ -92,12 +93,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
                         .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isOk());
     }
+
     @Test
     @DirtiesContext
     @WithMockUser
     void testUpdateTraining() throws Exception {
 
-        Training newTraining = new Training("1", "02.02.2222","Handball");
+        Training newTraining = new Training("1", "02.02.2222", "Handball", "OPEN");
         trainingRepository.save(newTraining);
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -105,15 +107,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         mockMvc.perform(
                         MockMvcRequestBuilders.put("/api/training/{id}", "1")
                                 .with(csrf())
-                                .content(objectMapper.writeValueAsBytes(new Training("1", "02.02.2222","Tennis")))
+                                .content(objectMapper.writeValueAsBytes(new Training("1", "02.02.2222", "Tennis", "In_Planung")))
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
-                    {"id": "1","date":"02.02.2222","art": "Tennis" }
-                    """));
+                        {"id": "1","date":"02.02.2222","art": "Tennis","status": "In_Planung" }
+                        """));
     }
-
 
     @Test
     @WithMockUser
