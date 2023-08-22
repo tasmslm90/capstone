@@ -1,14 +1,16 @@
-.ubersrift{
+.ubersrift {
     text-align: center; /* Zentriert den Text horizontal */
     background-size: cover; /* Bildgröße anpassen */
     color: black; /* Textfarbe auf weiß setzen, um besser sichtbar zu sein */
     padding: 5px;
- }
+}
+
 .button:hover {
     background-color: #2980b9;
     transform: scale(1.05);
 }
-.button{
+
+.button {
     background-color: #52ab98;
     color: black;
     border: none;
@@ -18,24 +20,28 @@
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
 }
+
 :root {
     width: 100%;
 }
 
-.newtraining{
+.newtraining {
     background-color: #c8d8e4;
     border-radius: 10px;
     padding: 20px;
     margin-top: 20px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
+
 .newtraining ul {
     margin-bottom: 2px;
 }
+
 .newtraining h3 {
     font-size: 24px;
     margin-bottom: 10px;
 }
+
 .list1 {
 
     color: sienna;
@@ -43,6 +49,7 @@
     margin-bottom: 10px;
     text-align: left;
 }
+
 .art-options {
     margin-bottom: 10px;
 }
@@ -51,18 +58,20 @@
     margin-bottom: 10px;
 }
 
- li {
-     list-style-type: none;
+li {
+    list-style-type: none;
     font-family: Arial, sans-serif;
-     font-size: 12px;
-     text-align: center;
- }
+    font-size: 12px;
+    text-align: center;
+}
+
 .time-label {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 10px;
 
 }
+
 .select-time {
     height: 32px;
     font-size: 16px;
@@ -71,16 +80,18 @@
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+
 .selected-art,
 .selected-status {
     font-size: 16px;
     margin-top: 10px;
 }
 
-.time{
+.time {
     font-size: 100px;
     color: red;
 }
+
 .addbutton,
 .cancelbutton {
     padding: 10px 20px;
@@ -91,23 +102,27 @@
     margin-right: 10px;
     transition: background-color 0.3s;
 }
+
 .addbutton {
     background-color: #2b6777;
     color: white;
 }
 
 .cancelbutton {
-    background-color:dimgrey;
+    background-color: dimgrey;
     color: white;
 }
+
 .addbutton:hover,
 .cancelbutton:hover {
     background-color: #45a049;
     transition: background-color 0.3s;
 }
-.space-div{
+
+.space-div {
     margin-bottom: 16px;
 }
+
 .login {
     max-width: 400px;
     margin: 0 auto;
@@ -183,6 +198,7 @@
     color: white;
     height: 1px;
 }
+
 .logout-button-container {
     display: flex;
     justify-content: center;
@@ -208,14 +224,14 @@
 }
 
 .fc-header-toolbar {
-    background-color:#52ab98;
+    background-color: #52ab98;
     color: #fff;
     padding: 1px;
     border-radius: 5px;
     margin-bottom: 10px;
 }
 
-.player-homepage-button{
+.player-homepage-button {
     background-color: #2b6777;
     color: white;
     border: none;
@@ -225,6 +241,7 @@
     border-radius: 5px;
     transition: background-color 0.3s;
 }
+
 .homepage-button-container {
     display: flex;
     justify-content: center;
@@ -258,7 +275,6 @@
     }
 }
 
-
 .action-btn {
     background-color: #4CAF50; /* Grün */
     color: white;
@@ -270,6 +286,7 @@
     margin: 0 5px;
     transition: background-color 0.3s;
 }
+
 .action-btnx {
     background-color: red;
     color: white;
@@ -300,7 +317,8 @@
     background-color: rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
-.headertable th{
+
+.headertable th {
     background-color: #c2d2bd;
     border: 1px solid #ddd;
     padding: 4px;
@@ -308,9 +326,73 @@
     width: 14.28%;
 
 }
-/*.training-container {*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*    height: 100vh; !* 100% der Bildschirmhöhe *!*/
-/*}*/
+.wetter {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background-color: #52ab98;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.wetter input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+.wetter button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 16px;
+}
+
+.wetter button:hover {
+    background-color: #0056b3;
+}
+
+.wetter p {
+    font-size: 16px;
+    margin: 5px 0;
+    text-align: left;
+}
+
+.wetter p.temperature {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.wetter p.condition {
+    text-transform: capitalize;
+    color: #555;
+}
+
+.wetter p.description {
+    color: #777;
+}
+
+.bild{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("/images/Bild.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.5;
+    z-index: -1;
+}
+

@@ -18,7 +18,7 @@ export default function LoginPage(props: Props) {
 
     return (
         <>
-            <h2>Welcome to Sports Club</h2>
+            <h2>Welcome to Sports Club MSL 18</h2>
             <div className={"login"}>
                 <form onSubmit={onLogin}>
                     <p>Login</p>
