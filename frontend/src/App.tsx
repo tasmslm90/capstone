@@ -1,35 +1,89 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import {useEffect, useState} from 'react'
 import './App.css'
+import axios from "axios";
+import {Training} from "./Training.tsx";
+import MyCalendar from "./MyCalender.tsx";
+import LoginPage from "./LoginPage.tsx";
+import {Route, Routes, useNavigate} from "react-router-dom";
+import HomePage from "./HomePage.tsx";
+import ProtectedRoutes from "./ProtectedRoutes.tsx";
+import PlayerHomepage from "./Player-Homepage.tsx";
+import LogoutButton from "./LogoutButton.tsx";
+import {UserData} from "./UserData.tsx";
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [trainings, setTrainings] = useState<Training[]>([]);
+    const [user, setUser] = useState<UserData>()
+    const navigate = useNavigate()
+    const fetchTrainings = async () => {
+        try {
+            const response = await axios.get("/api/training");
+            setTrainings(response.data);
+        } catch (error) {
+            console.error("Fehler beim Abrufen der Trainings:", error);
+        }
+    };
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    function login(username: string, password: string) {
+        axios.post("/api/users/login", null, {auth: {username, password}})
+            .then((response) => {
+                setUser(response.data)
+                if (response.data.role === "PLAYER") {
+                    navigate("/player-homepage")
+                } else if (response.data.role === "TRAINER") {
+                    navigate("/")
+                } else {
+                    navigate("/login")
+                }
+            })
+    }
+
+    function me() {
+        axios.get("/api/users/me")
+            .then((response) => {
+                setUser(response.data)
+            })
+    }
+
+    function editedTraining(editedTraining: Training) {
+
+        axios.put("/api/training/" + editedTraining.id, editedTraining)
+            .then((response) =>
+                setTrainings((prevState) => prevState.map((training) => {
+                    if (training.id === editedTraining.id) {
+                        return response.data;
+                    } else {
+                        return training;
+                    }
+                }))
+            )
+    }
+
+    useEffect(() => {
+        me()
+        fetchTrainings();
+
+    }, []);
+    const isLoginPage = () => {
+        return location.pathname === '/login';
+    };
+
+    return (
+        <>
+            <Routes>
+                <Route element={<ProtectedRoutes user={user}/>}>
+                    <Route path="/" element={<HomePage trainings={trainings} user={user} fetchTrainings={fetchTrainings}
+                                                       editedTraining={editedTraining}/>}/>
+                    <Route path="/kalender" element={<MyCalendar fetchTrainings={fetchTrainings}></MyCalendar>}/>
+
+                    <Route path="/player-homepage" element={<PlayerHomepage></PlayerHomepage>}/>
+                </Route>
+                <Route path="/login" element={<LoginPage onLogin={login}></LoginPage>}/>
+            </Routes>
+            {!isLoginPage() && <LogoutButton onLogoutSuccess={() => setUser(undefined)}/>}
+
+        </>
+    )
 }
 
 export default App
