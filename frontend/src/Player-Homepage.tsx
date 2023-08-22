@@ -3,12 +3,22 @@ import {useEffect, useState} from "react";
 import {Training} from "./Training.tsx";
 import {UserData} from "./UserData.tsx";
 
+
+const api = {
+    key:'be14194761c855065b96d51d695d7f2d',
+    base:"https://api.openweathermap.org/data/2.5/",
+};
 export default function PlayerHomepage() {
+
     const [user, setUser] = useState<UserData>()
     const [trainings, setTrainings] = useState<Training[]>([]);
     const [status, setStatus] = useState<string| null>("");
     const [successMessage, setSuccessMessage] = useState<string | null>(null);
     const [successMessageColor, setSuccessMessageColor] = useState<string>("");
+    const [search,setSearch] = useState("")
+    const [weather,setWeather] = useState({name: 'Essen',
+        main: { temp: 0 },
+        weather: [{ main: '', description: '' }]});
     const fetchTrainings = async () => {
         try {
             const response = await axios.get("/api/training");
@@ -56,8 +66,32 @@ export default function PlayerHomepage() {
             setStatus(status === trainingId ? null : trainingId);
         }
     };
+    const searchPressed= ()=>{
+        fetch(`${api.base}weather?q=${search}&units=metric&APPID=${api.key}`)
+            .then((res)=>res.json())
+            .then((result) =>{
+                setWeather(result);
+            });
+    }
     return (
         <>
+            <div className={"wetter"}>
+                {/* Search Box*/}
+                <input type="text" placeholder="Enter City/Town"
+                onChange={(e) => setSearch(e.target.value)}/>
+                <button onClick={searchPressed}>Search</button>
+
+                {/* Location*/}
+                <p>{weather.name}</p>
+                {/* Temperature F/C*/}
+                {weather.main && (
+                    <p>{Math.round(weather.main.temp)}°C</p>
+                )}
+                {/* Condition (Sunny)*/}
+                <p> {weather.weather[0].main}</p>
+                <p> {weather.weather[0].description}</p>
+
+            </div>
             <h2>Your Trainings {user?.name}</h2>
             <div className="training-container">
                 {successMessage && <div className="success-message" style={{ backgroundColor: successMessageColor }}>{successMessage}</div>}

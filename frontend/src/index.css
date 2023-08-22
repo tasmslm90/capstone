@@ -308,9 +308,9 @@
     width: 14.28%;
 
 }
-.training-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* 100% der Bildschirmhöhe */
-}
+/*.training-container {*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    height: 100vh; !* 100% der Bildschirmhöhe *!*/
+/*}*/
