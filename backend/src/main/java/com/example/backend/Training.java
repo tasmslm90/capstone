@@ -15,6 +15,6 @@ public class Training {
     private String id;
     private String date;
     private String art;
-    private String Status;
+    private String status;
 
 }

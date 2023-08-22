@@ -34,7 +34,8 @@ public class TrainingController {
     @PutMapping("/{id}")
     public ResponseEntity<Training> updateTraining(@PathVariable String id, @RequestBody Training updatedTraining) {
         try {
-            Training training = trainingService.updateTraining(updatedTraining);
+            Training newTraining = new Training(id, updatedTraining.getDate(), updatedTraining.getArt(), updatedTraining.getStatus());
+            Training training = trainingService.updateTraining(newTraining);
             if (training != null) {
                 return ResponseEntity.ok(training);
             } else {
