@@ -1,6 +1,6 @@
 export default function TableHeader() {
     return (
-<table>
+<table className={"headertable"}>
         <thead>
         <tr>
             <th>Date</th>

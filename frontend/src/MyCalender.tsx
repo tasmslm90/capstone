@@ -3,13 +3,14 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import momentPlugin from "@fullcalendar/moment";
 import {ChangeEvent, useState} from "react";
 import axios from "axios";
+import TableHeader from "./TableHaeder.tsx";
 function MyCalendar({ fetchTrainings}: { fetchTrainings: () => void}) {
     const [clickedDates, setClickedDates] = useState<Date[]>([]);
     const [dateSelectionDisabled, setDateSelectionDisabled] = useState(false);
     const [selectedArt, setSelectedArt] = useState("");
     const [selectedStatus, setSelectedStatus] = useState("");
-    const availableArtOptions = ["Fußball", "Basketball", "Handball", "Tennis"];
-    const availableStatusOptions = ["OPEN"];
+    const availableArtOptions = ["Football", "Basketball", "Handball", "Tennis"];
+    const availableStatusOptions = ["OPEN","In_Planning"];
 
 
     const handleDayClick = (dateClickInfo: any) => {
@@ -21,9 +22,11 @@ function MyCalendar({ fetchTrainings}: { fetchTrainings: () => void}) {
     };
     const renderDayButton = (info: { dayNumberText: string, date: Date }) => {
         return (
+            <div className="calendar-day-cell">
             <button className={"button"} onClick={() => handleDayClick(info)}>
                 {info.dayNumberText}
             </button>
+            </div>
         );
     };
     const handleTimeChange = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -85,11 +88,11 @@ function MyCalendar({ fetchTrainings}: { fetchTrainings: () => void}) {
 
     const renderStatusCheckbox = (status: string) => {
         return (
-            <label key={status} className={"art-checkbox"}>
+            <label key={status} className={"status-checkbox"}>
                 <input
                     type="checkbox"
                     value={status}
-                    checked={selectedArt.includes(status)}
+                    checked={selectedStatus.includes(status)}
                     onChange={handleStatusChange}
                 />
                 {status}
@@ -121,20 +124,15 @@ function MyCalendar({ fetchTrainings}: { fetchTrainings: () => void}) {
     }
     return (
         <>
-            <div className={"container"}>
-                <h1>Trainingsplaner</h1>
+                <h2 className={"ubersrift"}>Trainingsplaner</h2>
                 {<FullCalendar {...calendarOptions}
                 />}
-            </div>
-
             {clickedDates.length > 0 && (
                 <div className={"newtraining"}>
-                    <h2> Add new Training</h2>
                     <ul>
                         {clickedDates.map((date, index) => (
-                            <li className={"list1"} key={index}>{new Date(date).toLocaleDateString()}</li>
+                            <li className={"list1"} key={index}>Add new training for the date {new Date(date).toLocaleDateString()}</li>
                         ))}
-
                     </ul>
                     <div className={"art-options"}>
                         {availableArtOptions.map((art) => renderArtCheckbox(art))}
@@ -168,6 +166,7 @@ function MyCalendar({ fetchTrainings}: { fetchTrainings: () => void}) {
                     <button className={"cancelbutton"} onClick={handleCancel}>Cancel</button>
                 </div>
             )}
+            <TableHeader></TableHeader>
         </>
     )
 }

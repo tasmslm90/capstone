@@ -24,12 +24,11 @@ function HomePage(props: Props) {
     return (
         <>
             <MyCalendar fetchTrainings={props.fetchTrainings}></MyCalendar>
-
                 {props.trainings.map((training) => (
                     <TrainingCard training={training} onDeleteTraining={props.fetchTrainings}
                                   user={props.user} editedTraining={props.editedTraining}/>
                 ))}
-            <div className="button-group">
+            <div className="homepage-button">
                 <button className="player-homepage-button" onClick={handleGoToPlayerHomepage}>
                     Home
                 </button>

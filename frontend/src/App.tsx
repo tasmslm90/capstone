@@ -75,6 +75,7 @@ function App() {
                     <Route path="/" element={<HomePage trainings={trainings} user={user} fetchTrainings={fetchTrainings}
                                                        editedTraining={editedTraining}/>}/>
                     <Route path="/kalender" element={<MyCalendar fetchTrainings={fetchTrainings}></MyCalendar>}/>
+
                     <Route path="/player-homepage" element={<PlayerHomepage></PlayerHomepage>}/>
                 </Route>
                 <Route path="/login" element={<LoginPage onLogin={login}></LoginPage>}/>
@@ -84,5 +85,4 @@ function App() {
         </>
     )
 }
-
 export default App

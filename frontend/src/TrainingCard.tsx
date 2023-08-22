@@ -15,8 +15,17 @@ export default function TrainingCard(props: Props) {
 
 
     const [isEdit, setIsEdit] = useState<boolean>(false)
+    const handleEditClick = () => {
+        setIsEdit(true);
+    };
+    const handleSaveEdit = (editedTraining: Training) => {
+        props.editedTraining(editedTraining);
+        setIsEdit(false);
+    };
 
-
+    const handleCancelEdit = () => {
+        setIsEdit(false);
+    };
     const handleDeleteTraining = (id: string) => {
         axios.delete(`/api/training/${id}`)
             .then((response) => {
@@ -28,21 +37,11 @@ export default function TrainingCard(props: Props) {
             });
     };
     return (
-
-        <>
+<>
+        <div className={"card"}>
                 {!isEdit && (
                     <table className="training-table">
-                        <thead>
-                        <>
-                            <th>Date</th>
-                            <th>Time</th>
-                            <th>Type</th>
-                            <th>Trainer</th>
-                            <th>Status</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
-                        </>
-                        </thead>
+
                         <tbody>
                         <tr key={props.training.id}>
                             <td>{new Date(props.training.date).toLocaleDateString()}</td>
@@ -51,7 +50,7 @@ export default function TrainingCard(props: Props) {
                             <td>{props.user?.name}</td>
                             <td>{props.training.status}</td>
                             <td>
-                                <button className="edit-button" onClick={() => setIsEdit(!isEdit)}>
+                                <button className="edit-button" onClick={handleEditClick}>
                                     🖊️
                                 </button>
                             </td>
@@ -64,7 +63,9 @@ export default function TrainingCard(props: Props) {
                         </tbody>
                     </table>
                 )}
-            {isEdit && <EditForm training={props.training} editedTraining={props.editedTraining} />}
-        </>
+            {isEdit && <EditForm training={props.training}  onSaveEdit={handleSaveEdit}
+                                 onCancelEdit={handleCancelEdit} />}
+        </div>
+</>
     );
 }

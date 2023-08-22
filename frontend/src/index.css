@@ -1,55 +1,112 @@
-
+.ubersrift{
+    text-align: center; /* Zentriert den Text horizontal */
+    background-size: cover; /* Bildgröße anpassen */
+    color: black; /* Textfarbe auf weiß setzen, um besser sichtbar zu sein */
+    padding: 5px;
+ }
+.button:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+}
 .button{
-    background-color:navajowhite;
-    width: 40px;
-    height: 40px;
+    background-color: #52ab98;
+    color: black;
+    border: none;
+    padding: 14px 20px;
+    font-size: 10px;
+    border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
 }
 :root {
     width: 100%;
 }
 
 .newtraining{
-    text-align: center;
-    background-color: lightyellow;
+    background-color: #c8d8e4;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+.newtraining ul {
+    margin-bottom: 2px;
+}
+.newtraining h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+.list1 {
+
+    color: sienna;
+    font-size: 18px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+.art-options {
+    margin-bottom: 10px;
+}
+
+.status-options {
+    margin-bottom: 10px;
 }
 
  li {
      list-style-type: none;
     font-family: Arial, sans-serif;
-     font-size: 16px;
+     font-size: 12px;
      text-align: center;
  }
 .time-label {
     font-size: 18px;
     font-weight: bold;
+    margin-bottom: 10px;
 
 }
 .select-time {
-    height: 22px;
-    font-size: 17px;
+    height: 32px;
+    font-size: 16px;
+    width: 50%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.selected-art,
+.selected-status {
+    font-size: 16px;
+    margin-top: 10px;
 }
 
 .time{
     font-size: 100px;
     color: red;
 }
-
-.addbutton{
-    font-size: 18px;
+.addbutton,
+.cancelbutton {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    margin-right: 10px;
+    transition: background-color 0.3s;
 }
-.cancelbutton{
-    font-size: 18px;
+.addbutton {
+    background-color: #2b6777;
+    color: white;
 }
 
+.cancelbutton {
+    background-color:dimgrey;
+    color: white;
+}
+.addbutton:hover,
+.cancelbutton:hover {
+    background-color: #45a049;
+    transition: background-color 0.3s;
+}
 .space-div{
     margin-bottom: 16px;
-}
-
-.list1{
-    text-align: center;
-    color:red;
-    font-size: 18px;
 }
 .login {
     max-width: 400px;
@@ -105,16 +162,26 @@
 }
 
 .training-table {
+    margin-top: 1px;
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    font-size: 10px;
+    background-color: white;
 }
 
 .training-table th,
 .training-table td {
     border: 1px solid #ddd;
-    padding: 8px;
+    padding: 4px;
     text-align: center;
+    width: 14.28%;
+
+}
+
+.training-table th {
+    background-color: #52ab98;
+    color: white;
+    height: 1px;
 }
 .logout-button-container {
     display: flex;
@@ -126,7 +193,7 @@
 }
 
 .logout-button {
-    background-color: #3498db;
+    background-color: #2b6777;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -136,37 +203,114 @@
     transition: background-color 0.3s;
 }
 
-.logout-button:hover {
-    background-color: #2980b9;
-}
 .status-btn {
     cursor: pointer;
 }
 
 .fc-header-toolbar {
-    background-color:#2980b9;
+    background-color:#52ab98;
     color: #fff;
-    padding: 10px;
+    padding: 1px;
     border-radius: 5px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .player-homepage-button{
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-start;
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    width: 50px;
-    height: 20px;
-    background-color: #3498db;
+    background-color: #2b6777;
     color: white;
-    font-size: 16px;
     border: none;
+    padding: 10px 20px;
+    font-size: 16px;
     cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
 }
-.training-table {
-    font-size: 12px;
-    background-color:rosybrown ;
+.homepage-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    position: fixed;
+    bottom: 20px;
+    width: 100%;
+}
+
+.success-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 10px;
+    font-size: 18px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+    animation: fadeOut 3s ease-in-out;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+
+.action-btn {
+    background-color: #4CAF50; /* Grün */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 0 5px;
+    transition: background-color 0.3s;
+}
+.action-btnx {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 0 5px;
+    transition: background-color 0.3s;
+}
+
+.training-table td.status-cell {
+    position: relative;
+}
+
+.training-table td.status-cell.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.disabled-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+.headertable th{
+    background-color: #c2d2bd;
+    border: 1px solid #ddd;
+    padding: 4px;
+    text-align: center;
+    width: 14.28%;
+
+}
+.training-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* 100% der Bildschirmhöhe */
 }
